@@ -112,7 +112,7 @@ elif rubro == "Carpintería":
         st.write("###### La cooperativa deberá analizar (i) si el negocio tiene suficiente espacio para instalar el equipo a comprar, (ii) si el negocio podrá aguantar la elevación del monto necesario del capital de trabajo a generar por la inversión, (iii) otras alternativas que podrán aumentar la producitividad sin inversión, etc.")
 
     st.header(" :red[Calculador del inventario de seguridad]", divider="red") 
-    st.write("###### :red[Es importante calcular el volumen del inventario de seguridad, que se refiere a la cantidad necesaria para evitar escasez, en ciertas materias importnates, como maderas aserradas en la carpintería.]")  
+    st.write("###### :red[Es importante calcular el volumen del inventario de seguridad, que se refiere a la cantidad necesaria a mantener siempre para evitar escasez, en ciertas materias importnates, como maderas aserradas en la carpintería.]")  
 
     a = st.number_input("¿Hace 5 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 30)
     b = st.number_input("¿Hace 4 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 25)
