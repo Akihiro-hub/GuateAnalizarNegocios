@@ -9,7 +9,7 @@ rubro = st.sidebar.selectbox("Rubro de negocio a analizar", ["Seleccione", "Carp
 
 if rubro == "Seleccione":
     st.header(" :green[Puntos a analizar en cuanto al capital de trabajo y para la inversion en general]", divider="green") 
-    st.write("## :green[¿Cómo analizar la solicitud del crédito para el capital de trabajo?]") 
+    st.write("## :green[¿Qué tenemos que analizar la solicitud del crédito para el capital de trabajo?]") 
     st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Esta página presenta cómo analizar la solicitud para el capital de trabajo.") 
     st.write("###### El capital de trabajo se necesita para mantener la operación diaria del negocio. Algunas veces, la cantidad necesaria del capital de trabajo se puede aumentar, por (i) la expansión del negocio, (ii) el inventario sobrante, (iii) los costos operativos elevados, (iv) el motivo temporal, etc.") 
 
@@ -22,7 +22,7 @@ if rubro == "Seleccione":
         OP3 = st.checkbox("¿El valor de las cuentas por cobrar no es muy alto? ¿El mismo no se ha aumentado drasticamente en operaciones recientes?")
         OP4 = st.checkbox("¿El aumento de la necesidad del capital de trabajo se genera por la ineficiencia operativa, tales como la reducción drástica de la venta, aumento considerable del costos operativos, etc.? (En caso afirmativo, ¿la empresa aplica ciertas medidas para solucionarla?)")
         OP5 = st.checkbox("¿El monto de crédito solicitado, para el capital de trabajo normal, no supera el monto a calcular por la siguiente herramienta?")
-        OP6 = st.checkbox("¿El empresario no solicita el crédito por otras razones, como el costo del viaje para los extranjeros?")
+        OP6 = st.checkbox("¿El empresario no solicita el crédito por otros motivos personales?")
         if OP1 and OP2 and OP3 and OP4 and OP5 and OP6:
             st.toast("¡Buen observado!")
             st.balloons()
@@ -54,11 +54,10 @@ if rubro == "Seleccione":
         OP4 = st.checkbox("¿El monto de ganancia (más depreciación) supera el importe de reembolso del crédito?")
         OP5 = st.checkbox("¿El negocio tiene suficiente espacio para instalar el equipo a comprar?")
         OP6 = st.checkbox("¿El plan de inversión es financieramente apropiada, aplicando la siguiente herramienta?")
-        OP7 = st.checkbox("¿El empresario no solicita el crédito por otras razones, como el costo del viaje para los extranjeros?")
-        if OP1 and OP2 and OP3 and OP4 and OP5 and OP6 and OP7:
+        if OP1 and OP2 and OP3 and OP4 and OP5 and OP6:
             st.toast("¡Buen observado!")
             st.balloons()
-        elif OP7:
+        elif OP5:
             st.toast("La inversión aumentará necesidades del capital de trabajo, por ende, deberá analizar bien su factibilidad.")
                 
     with col2:
