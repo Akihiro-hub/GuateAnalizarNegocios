@@ -2,21 +2,21 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
-st.write("## Análisis de negocios (PyMEs) y sus solicitudes del crédito, mediante la entrevista y la visita por el colaborador de la cooperativa") 
+st.write("## Análisis de negocios (PyMEs) y sus solicitudes del crédito, mediante la entrevista y la visita por el colaborador de la cooperativa
 st.write("### :green[(Modelo GuateCrece)]")
 st.write("###### Cuando una cooperativa recibe consultas sobre el crédito por un negocio asociado, será importante analizar, mediante la entrevista y la visita, :red[(i) demandas del capital de trabajo o para la inversión y (ii) la situación de la operación de la empresa solicitante]. (NOTA: Los detalles de cada uno de estos puntos a analizar en cada uno de rubros del negocio se presentarán, dependiendo de su selección en las opciones a la izquierda.)")
 
 rubro = st.sidebar.selectbox("Rubro de negocio a analizar", ["Seleccione", "Carpintería", "Panadería", "Restaurante(Comedor)", "Negocio de impresión", "Construcción", "Corte y confección", "Mercadito(Pulpería)", "Escuela del idioma", "Reparación del auto"])
 
 if rubro == "Seleccione":
-    st.header(" :green[Puntos a analizar en cuanto al capital de trabajo y para la inversion en general]", divider="green") 
-    st.write("## :green[¿Qué tenemos que analizar la solicitud del crédito para el capital de trabajo?]") 
-    st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Esta página presenta cómo analizar la solicitud para el capital de trabajo.") 
+    st.header(" :green[Puntos a analizar sobre la demanda del fondo en general]", divider="green") 
+    st.write("#### :green[(1) ¿Qué tenemos que analizar la solicitud del crédito para el capital de trabajo?]") 
+    st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Abajo se presentan los puntos a analizar la solicitud para el capital de trabajo.") 
     st.write("###### El capital de trabajo se necesita para mantener la operación diaria del negocio. Algunas veces, la cantidad necesaria del capital de trabajo se puede aumentar, por (i) la expansión del negocio, (ii) el inventario sobrante, (iii) los costos operativos elevados, (iv) el motivo temporal, etc.") 
 
     col1, col2 = st.columns(2)
     with col1:
-        st.header(" :red[Lista de chequeo]", divider="red") 
+        st.write("##### :red[Lista de chequeo]", divider="red") 
         st.write("###### Con relación a la solicitud del crédito para el capital de trabajo, deberá averiguar los siguientes.")
         OP1 = st.checkbox("¿El negocio no tiene el inventario sobrante? ¿No tiene el inventario de productos que ya están fuera de moda y difíciles de vender? (Si el volumen del inventario se ha aumentado mucho, ¿tiene su causa razonable?)")
         OP2 = st.checkbox("¿Las ventas y compras están y estrían estables hoy y en el futuro? (En caso afirmativo, ¿la empresa aplica ciertas medidas para solucionarla?)")
@@ -31,7 +31,7 @@ if rubro == "Seleccione":
             st.toast("La ineficiencia operativa, aumento del inventario, etc. aumentarán la demanda del capital de trabajo.")
                 
     with col2:
-        st.header(" :blue[Herramienta para el análisis]", divider="blue") 
+        st.write("##### :blue[Herramienta para el análisis]", divider="blue") 
         st.write("###### :blue[Calculadora del monto total necesario del capital de trabajo normal del negocio]")  
         e = st.number_input("Valor del inventario (GTQ)", 1, 10000000000000, 8000)
         f = st.number_input("Cuentas por pagar (GTQ)", 1, 10000000000000, 2000)
@@ -41,13 +41,13 @@ if rubro == "Seleccione":
         st.text(h)
         st.write("###### :red[Cabe decir que el monto a prestar para el capital de trabajo normal no debe superar dicho monto.]")
 
-    st.write("## :green[¿Cómo analizar la solicitud del crédito para el capital de inversión?]") 
-    st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Esta página presenta cómo analizar la solicitud para el capital de inversión.") 
+    st.write("#### :green[(2) ¿Qué tenemos que analizar la solicitud del crédito para el capital de inversión?]") 
+    st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Abajo se presentan los puntos a analizar la solicitud para el capital de inversión.") 
     st.write("###### La inversión se hace para (i) montar o expandir el negocio, (ii) desarrollar nuevos productos y/o (iii) sustituir equipos ya viejos. Cabe decir que la inversión aumentará las necesidades del capital de trabajo.") 
 
     col1, col2 = st.columns(2)
     with col1:
-        st.header(" :red[Lista de chequeo]", divider="red") 
+        st.write("##### :red[Lista de chequeo]", divider="red") 
         st.write("###### Con relación a la solicitud del crédito para el capital de inversión, deberá averiguar los siguientes.")
         OP1 = st.checkbox("¿El motivo de inversión es razonable? (Posibles motivos pueden incluir; compra del equipo nuevo para aumentar la producción, sustitución de equipos ya viejos, y/o desarrollo de nuevos mercados y negocios.)")
         OP2 = st.checkbox("¿La empresa podrá esperar un aumento de la venta por la inversión de nueva maquinaria, recibiendo las ordenes de los clientes?")
@@ -62,7 +62,7 @@ if rubro == "Seleccione":
             st.toast("La inversión aumentará necesidades del capital de trabajo, por ende, deberá analizar bien su factibilidad.")
                 
     with col2:
-        st.header(" :blue[Herramienta para el análisis]", divider="blue") 
+        st.write("##### :blue[Herramienta para el análisis]", divider="blue") 
         st.write("###### :blue[Calculadora del valor presente neto del proyecto]")  
         a = st.number_input("¿Cuánto se debe invertir al inicio del proyecto (GTQ)?", 0, 10000000000000, 50000)
         b = st.number_input("¿Cuál es tasa de costo del capital del negocio (%)?", 0, 100, 12)
