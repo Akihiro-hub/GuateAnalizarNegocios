@@ -126,11 +126,12 @@ elif rubro == "Carpintería":
     Inventario_seguridad1 = 2.33 * SD * math.sqrt(g)
     Inventario_seguridad5 = 1.64 * SD * math.sqrt(g)   
     Inventario_seguridad10 = 1.28 * SD * math.sqrt(g)
-    st.write("###### Resultado de cálculo: Volumen de inventaruio de seguridad con la probabilidad de escasez de 1% (piezas)")
+    st.write("##### Resultado de cálculo:") 
+    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 1% (piezas)")
     st.text(round(Inventario_seguridad1))
-    st.write("###### Resultado de cálculo: Volumen de inventaruio de seguridad con la probabilidad de escasez de 5% (piezas)")
+    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 5% (piezas)")
     st.text(round(Inventario_seguridad5))
-    st.write("###### Resultado de cálculo: Volumen de inventaruio de seguridad con la probabilidad de escasez de 10% (piezas)")
+    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 10% (piezas)")
     st.text(round(Inventario_seguridad10))
 
 elif rubro == "Panadería":
