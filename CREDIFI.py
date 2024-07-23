@@ -23,11 +23,11 @@ if rubro == "Seleccione":
         OP3 = st.checkbox("¿El valor de las cuentas por cobrar no es muy alto? ¿El mismo no se ha aumentado drasticamente en operaciones recientes?")
         OP4 = st.checkbox("¿El aumento de la necesidad del capital de trabajo se genera por la ineficiencia operativa, tales como la reducción drástica de la venta, aumento considerable del costos operativos, etc.? (En caso afirmativo, ¿la empresa aplica ciertas medidas para solucionarla?)")
         OP5 = st.checkbox("¿El monto de crédito solicitado, para el capital de trabajo normal, no supera el monto a calcular por la siguiente herramienta?")
-        OP6 = st.checkbox("¿El empresario no solicita el crédito por otros motivos personales?")
-        if OP1 and OP2 and OP3 and OP4 and OP5 and OP6:
+
+        if OP1 and OP2 and OP3 and OP4 and OP5:
             st.toast("¡Buen observado!")
             st.balloons()
-        elif OP6:
+        elif OP5:
             st.toast("La ineficiencia operativa, aumento del inventario, etc. aumentarán la demanda del capital de trabajo.")
                 
     with col2:
@@ -55,6 +55,7 @@ if rubro == "Seleccione":
         OP4 = st.checkbox("¿El monto de ganancia (más depreciación) supera el importe de reembolso del crédito?")
         OP5 = st.checkbox("¿El negocio tiene suficiente espacio para instalar el equipo a comprar?")
         OP6 = st.checkbox("¿El plan de inversión es financieramente apropiada, aplicando la siguiente herramienta?")
+        
         if OP1 and OP2 and OP3 and OP4 and OP5 and OP6:
             st.toast("¡Buen observado!")
             st.balloons()
