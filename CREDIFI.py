@@ -16,7 +16,7 @@ if rubro == "Seleccione":
 
     col1, col2 = st.columns(2)
     with col1:
-        st.write("##### :red[Lista de chequeo]", divider="red") 
+        st.write("#### :red[Lista de chequeo]", divider="red") 
         st.write("###### :red[Con relación a la solicitud del crédito para el capital de trabajo, deberá averiguar los siguientes.]")
         OP1 = st.checkbox("¿El negocio no tiene el inventario sobrante? ¿No tiene el inventario de productos que ya están fuera de moda y difíciles de vender? (Si el volumen del inventario se ha aumentado mucho, ¿tiene su causa razonable?)")
         OP2 = st.checkbox("¿Las ventas y compras están y estrían estables hoy y en el futuro? (En caso afirmativo, ¿la empresa aplica ciertas medidas para solucionarla?)")
@@ -31,7 +31,7 @@ if rubro == "Seleccione":
             st.toast("La ineficiencia operativa, aumento del inventario, etc. aumentarán la demanda del capital de trabajo.")
                 
     with col2:
-        st.write("##### :blue[Herramienta para el análisis]", divider="blue") 
+        st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
         st.write("###### :blue[Calculadora del monto total necesario del capital de trabajo normal del negocio]")  
         e = st.number_input("Valor del inventario (GTQ)", 1, 10000000000000, 8000)
         f = st.number_input("Cuentas por pagar (GTQ)", 1, 10000000000000, 2000)
@@ -39,7 +39,7 @@ if rubro == "Seleccione":
         h = e + g - f
         st.write("##### Resultado del cálculo: Monto total necesario del capital de trabajo normal (GTQ):")
         st.text(h)
-        st.write("###### :red[Cabe decir que el monto a prestar para el capital de trabajo normal no debe superar dicho monto.]")
+        st.write("###### :blue[Cabe decir que el monto a prestar para el capital de trabajo normal no debe superar dicho monto.]")
 
     st.write("#### :green[(2) ¿Qué tenemos que analizar la solicitud del crédito para el capital de inversión?]") 
     st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Abajo se presentan los puntos a analizar la solicitud para el capital de inversión.") 
@@ -47,7 +47,7 @@ if rubro == "Seleccione":
 
     col1, col2 = st.columns(2)
     with col1:
-        st.write("##### :red[Lista de chequeo]", divider="red") 
+        st.write("#### :red[Lista de chequeo]", divider="red") 
         st.write("###### :red[Con relación a la solicitud del crédito para el capital de inversión, deberá averiguar los siguientes.]")
         OP1 = st.checkbox("¿El motivo de inversión es razonable? (Posibles motivos pueden incluir; compra del equipo nuevo para aumentar la producción, sustitución de equipos ya viejos, y/o desarrollo de nuevos mercados y negocios.)")
         OP2 = st.checkbox("¿La empresa podrá esperar un aumento de la venta por la inversión de nueva maquinaria, recibiendo las ordenes de los clientes?")
@@ -63,7 +63,7 @@ if rubro == "Seleccione":
             st.toast("La inversión aumentará necesidades del capital de trabajo, por ende, deberá analizar bien su factibilidad.")
                 
     with col2:
-        st.write("##### :blue[Herramienta para el análisis]", divider="blue") 
+        st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
         st.write("###### :blue[Calculadora del valor presente neto del proyecto]")  
         a = st.number_input("¿Cuánto se debe invertir al inicio del proyecto (GTQ)?", 0, 10000000000000, 50000)
         b = st.number_input("¿Cuál es tasa de costo del capital del negocio (%)?", 0, 100, 12)
@@ -78,7 +78,7 @@ if rubro == "Seleccione":
             
         st.write("#### Valor Presente Neto (VPN) de la inversión (GTQ):")
         st.text(f"VPN: {round(npv)}")
-        st.write("###### La inversion con VPN negativo o insuficiente deberá rechazarse.")
+        st.write("###### :blue[La inversion con VPN negativo o insuficiente deberá rechazarse.]")
 
     st.header(" :blue[Herramienta de referencia]", divider="blue") 
     st.write("###### :blue[El monto disponible para prestar dependerá de (i) cuota mensual a poder pagar, (ii) tasa de interés, y (iii) período de amortización, como se puede calcular mediante esta herramienta.]")
