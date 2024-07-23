@@ -17,7 +17,7 @@ if rubro == "Seleccione":
     col1, col2 = st.columns(2)
     with col1:
         st.write("##### :red[Lista de chequeo]", divider="red") 
-        st.write("###### Con relación a la solicitud del crédito para el capital de trabajo, deberá averiguar los siguientes.")
+        st.write("###### :red[Con relación a la solicitud del crédito para el capital de trabajo, deberá averiguar los siguientes.]")
         OP1 = st.checkbox("¿El negocio no tiene el inventario sobrante? ¿No tiene el inventario de productos que ya están fuera de moda y difíciles de vender? (Si el volumen del inventario se ha aumentado mucho, ¿tiene su causa razonable?)")
         OP2 = st.checkbox("¿Las ventas y compras están y estrían estables hoy y en el futuro? (En caso afirmativo, ¿la empresa aplica ciertas medidas para solucionarla?)")
         OP3 = st.checkbox("¿El valor de las cuentas por cobrar no es muy alto? ¿El mismo no se ha aumentado drasticamente en operaciones recientes?")
@@ -48,7 +48,7 @@ if rubro == "Seleccione":
     col1, col2 = st.columns(2)
     with col1:
         st.write("##### :red[Lista de chequeo]", divider="red") 
-        st.write("###### Con relación a la solicitud del crédito para el capital de inversión, deberá averiguar los siguientes.")
+        st.write("###### :red[Con relación a la solicitud del crédito para el capital de inversión, deberá averiguar los siguientes.]")
         OP1 = st.checkbox("¿El motivo de inversión es razonable? (Posibles motivos pueden incluir; compra del equipo nuevo para aumentar la producción, sustitución de equipos ya viejos, y/o desarrollo de nuevos mercados y negocios.)")
         OP2 = st.checkbox("¿La empresa podrá esperar un aumento de la venta por la inversión de nueva maquinaria, recibiendo las ordenes de los clientes?")
         OP3 = st.checkbox("¿La inversión no causará la falta del capital de trabajo, mediante el aumento de costos operativos, incluyendo la compra aumentada de materias primas, costos financieros elevados, etc.?")
