@@ -2,13 +2,14 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
-rubro = st.sidebar.selectbox("Rubro de negocio a analizar", ["Seleccione", "Carpintería", "Panadería", "Restaurante(Comedor)", "Negocio de impresión", "Construcción", "Corte y confección", "Mercadito(Pulpería)", "Escuela del idioma", "Reparación del auto"])
+rubro = st.sidebar.selectbox("Rubro de negocio a analizar", ["Seleccione", "Carpintería", "Panadería", "Restaurante(Comedor)", "Negocio de impresión", "Construcción", "Corte y confección", "Mercadito(Pulpería)", "Escuela del idioma", "Reparación del auto", "Temas tranversales sobre uso del fondo"])
 
 if rubro == "Seleccione":
     st.write("## Análisis de negocios (PyMEs) y sus solicitudes del crédito, mediante la entrevista y la visita por el colaborador de la cooperativa")
     st.write("### :green[(Modelo GuateCrece)]")
     st.write("###### Cuando una cooperativa recibe consultas sobre el crédito por un negocio asociado, será importante analizar, mediante la entrevista y la visita, :red[(i) demandas del capital de trabajo o para la inversión y (ii) la situación de la operación de la empresa solicitante]. (NOTA: Los detalles de cada uno de estos puntos a analizar en cada uno de rubros del negocio se presentarán, dependiendo de su selección en las opciones a la izquierda.)")
 
+elif rubro == "Temas transversales sobre uso del fondo"
     st.header(" :green[Puntos a analizar sobre la demanda del fondo en general]", divider="green") 
     st.write("#### :green[(1) ¿Qué tenemos que analizar la solicitud del crédito para el capital de trabajo?]") 
     st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Abajo se presentan los puntos a analizar la solicitud para el capital de trabajo.") 
