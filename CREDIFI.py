@@ -7,8 +7,11 @@ rubro = st.sidebar.selectbox("Rubro de negocio a analizar", ["Seleccione", "Carp
 if rubro == "Seleccione":
     st.write("## Análisis de negocios (PyMEs) y sus solicitudes del crédito, mediante la entrevista y la visita por el colaborador de la cooperativa")
     st.write("### :green[(Modelo GuateCrece)]")
-    st.write("###### Cuando una cooperativa recibe consultas sobre el crédito por un negocio asociado, será importante analizar, mediante la entrevista y la visita, :red[(i) demandas del capital de trabajo o para la inversión y (ii) la situación de la operación de la empresa solicitante]. (NOTA: Los detalles de cada uno de estos puntos a analizar en cada uno de rubros del negocio se presentarán, dependiendo de su selección en las opciones a la izquierda.)")
-    st.image("Logo.png", width = 400)
+    col1, col2 = st.columns(2)
+    with col1: 
+        st.write("###### Cuando una cooperativa recibe consultas sobre el crédito por un negocio asociado, será importante analizar, mediante la entrevista y la visita, :red[(i) demandas del capital de trabajo o para la inversión y (ii) la situación de la operación de la empresa solicitante]. (NOTA: Los detalles de cada uno de estos puntos a analizar en cada uno de rubros del negocio se presentarán, dependiendo de su selección en las opciones a la izquierda.)")
+    with col2:
+        st.image("Logo.png", width = 100)
 
 elif rubro == "Temas tranversales(uso de fondo)":
     st.header(" :green[Puntos a analizar sobre la demanda del fondo en general]", divider="green") 
