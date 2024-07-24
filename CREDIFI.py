@@ -9,8 +9,8 @@ if rubro == "Seleccione":
     col1, col2 = st.columns(2)
     with col1: 
         st.write("### :blue[(Modelo GuateCrece)]")
-        st.write("###### Cuando una cooperativa recibe consultas sobre el crédito por un negocio asociado, será importante analizar, mediante la entrevista y la visita, :blue[(i) demandas del capital de trabajo o para la inversión y (ii) la situación de la operación de la empresa solicitante,] considerando las caracter@isiticas de la operación que cada uno de los rubros del negocio tiene.") 
-        st.write("###### (NOTA: Los detalles de cada uno de estos puntos a analizar en cada uno de rubros del negocio se presentarán, dependiendo de su selección en las opciones a la izquierda.)")
+        st.write("###### Cuando una cooperativa recibe consultas sobre el crédito por un negocio asociado, será importante analizar, mediante la entrevista y la visita, :blue[(i) demandas del capital de trabajo o para la inversión y (ii) la situación de la operación de la empresa solicitante,] considerando las caracterísiticas de la operación que cada uno de los rubros del negocio tiene.") 
+        st.write("###### (NOTA: Los detalles de puntos a analizar en cada uno de rubros se presentarán, dependiendo de su selección en las opciones presentadas a la izquierda.)")
     with col2:
         st.image("Logo.png", width = 280)
 
