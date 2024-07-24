@@ -8,10 +8,11 @@ if rubro == "Seleccione":
     st.write("## Análisis de negocios (PyMEs) y sus solicitudes del crédito, mediante la entrevista y la visita por el colaborador de la cooperativa")
     col1, col2 = st.columns(2)
     with col1: 
-        st.write("### :green[(Modelo GuateCrece)]")
-        st.write("###### Cuando una cooperativa recibe consultas sobre el crédito por un negocio asociado, será importante analizar, mediante la entrevista y la visita, :red[(i) demandas del capital de trabajo o para la inversión y (ii) la situación de la operación de la empresa solicitante]. (NOTA: Los detalles de cada uno de estos puntos a analizar en cada uno de rubros del negocio se presentarán, dependiendo de su selección en las opciones a la izquierda.)")
+        st.write("### :blue[(Modelo GuateCrece)]")
+        st.write("###### Cuando una cooperativa recibe consultas sobre el crédito por un negocio asociado, será importante analizar, mediante la entrevista y la visita, :blue[(i) demandas del capital de trabajo o para la inversión y (ii) la situación de la operación de la empresa solicitante].") 
+        st.write("###### (NOTA: Los detalles de cada uno de estos puntos a analizar en cada uno de rubros del negocio se presentarán, dependiendo de su selección en las opciones a la izquierda.)")
     with col2:
-        st.image("Logo.png", width = 300)
+        st.image("Logo.png", width = 280)
 
 
 elif rubro == "Temas tranversales(uso de fondo)":
