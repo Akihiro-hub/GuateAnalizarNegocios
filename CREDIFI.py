@@ -14,7 +14,6 @@ if rubro == "Seleccione":
     with col2:
         st.image("Logo.png", width = 280)
 
-
 elif rubro == "Temas tranversales(uso de fondo)":
     st.header(" :green[Puntos a analizar sobre la demanda del fondo en general]", divider="green") 
     st.write("#### :green[(1) ¿Qué tenemos que analizar la solicitud del crédito para el capital de trabajo?]") 
@@ -25,14 +24,14 @@ elif rubro == "Temas tranversales(uso de fondo)":
     with col1:
         st.write("#### :red[Lista de chequeo]", divider="red") 
         st.write("###### :red[Con relación a la solicitud del crédito para el capital de trabajo, deberá averiguar los siguientes.]")
-        OP1 = st.checkbox("¿El negocio no tiene el inventario sobrante? ¿No tiene el inventario de productos que ya están fuera de moda y difíciles de vender? (Si el volumen del inventario se ha aumentado mucho, ¿tiene su causa razonable?)")
-        OP2 = st.checkbox("¿Las ventas y compras están y estrían estables hoy y en el futuro? (En caso afirmativo, ¿la empresa aplica ciertas medidas para solucionarla?)")
-        OP3 = st.checkbox("¿El valor de las cuentas por cobrar no es muy alto? ¿El mismo no se ha aumentado drasticamente en operaciones recientes?")
+        OP1 = st.checkbox("¿El negocio no tiene el inventario sobrante? ¿No tiene saldos de productos que estén fuera de temporada o de moda, que sean difíciles de vender? (Si hay un aumento alto en la cantidad de inventario de productos, ¿tiene una causa razonable?)")
+        OP2 = st.checkbox("¿Considera que las ventas y compras de los productos están y estrían estables hoy y en el futuro? (En caso no afirmativo, ¿la empresa aplica ciertas medidas para mejorar?)")
+        OP3 = st.checkbox("¿El valor de las cuentas por cobrar no es alto en este tiempo? ¿Esta situación responde porque no ha habido un aumento drástico en operaciones recientes?")
         OP4 = st.checkbox("¿El aumento de la necesidad del capital de trabajo se genera por la ineficiencia operativa, tales como la reducción drástica de la venta, aumento considerable del costos operativos, etc.? (En caso afirmativo, ¿la empresa aplica ciertas medidas para solucionarla?)")
         OP5 = st.checkbox("¿El monto de crédito solicitado, para el capital de trabajo normal, no supera el monto a calcular por la siguiente herramienta?")
 
         if OP1 and OP2 and OP3 and OP4 and OP5:
-            st.toast("¡Buen observado!")
+            st.toast("¡Bien observado!")
             st.balloons()
         elif OP5:
             st.toast("La ineficiencia operativa, aumento del inventario, etc. aumentarán la demanda del capital de trabajo.")
@@ -64,10 +63,8 @@ elif rubro == "Temas tranversales(uso de fondo)":
         OP6 = st.checkbox("¿El plan de inversión es financieramente apropiada, aplicando la siguiente herramienta?")
         
         if OP1 and OP2 and OP3 and OP4 and OP5 and OP6:
-            st.toast("¡Buen observado!")
+            st.toast("¡Bien observado!")
             st.balloons()
-        elif OP5:
-            st.toast("La inversión aumentará necesidades del capital de trabajo, por ende, deberá analizar bien su factibilidad.")
                 
     with col2:
         st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
@@ -101,8 +98,8 @@ elif rubro == "Carpintería":
     col1, col2 = st.columns(2)
     with col1:
         st.write("### :green[Lista de chequeo]")
-        OP1 = st.checkbox("¿Materias primas y productos finales se guardan de manera ordenada?")
-        OP2 = st.checkbox("En el negocio de carpinteria, el uso eficiente de maderas aserradas es uno de los temas prioritarios para aumentar las ganancias, ya que la mayoría de los costos operativos son de materias primas. ¿No tiene muchos desperdicios a desechar? ¿Buen rendimiento de materias primas (maderas)?" )
+        OP1 = st.checkbox("En el negocio de carpinteria, el uso eficiente de maderas aserradas es uno de los temas prioritarios para aumentar las ganancias, ya que la mayoría de los costos operativos son de materias primas. ¿No tiene muchos desperdicios a desechar? ¿Buen rendimiento de materias primas (maderas)?" )
+        OP2 = st.checkbox("¿Materias primas y productos finales se guardan de manera ordenada?")
         OP3 = st.checkbox("¿El negocio tiene el proveedor que suministra la madera aserrada de manera estable, con buenas condiciones de compras?" )
         OP4 = st.checkbox("¿El negocio tiene ciertos clientes habituales quienes pagan con buenas condiciones, o aplica algunas medidas para estabilizar sus ventas?" )
         OP5 = st.checkbox("¿El negocio intenta reducir el tiempo desde la compra de materias primas hasta la entrega (venta) de los productos a los clientes, para mejorar su flujo de caja?" )
@@ -211,7 +208,7 @@ elif rubro == "Restaurante(Comedor)":
     st.text(E*e)
         
 elif rubro == "Negocio de impresión":
-    st.title("¿Cómo analizar la operación del Negocio de impresion?")
+    st.title("¿Cómo analizar la operación del Negocio de impresión?")
 
     col1, col2 = st.columns(2)
     with col1:
@@ -333,7 +330,6 @@ elif rubro == "Reparación del auto":
         st.write("###### La inversión es necesaria para maquina de reparaciones, al inicio del negocio y/o para actualización tecnológica.")
         st.write("###### La cooperativa deberá analizar si la inversión no genera complicaciones en el flujo de caja del negocio o no.")
 
-
 elif rubro == "Escuela del idioma":
     st.title("¿Cómo analizar la operación del negocio de Escuela del idioma español para turistas internacionales?")
 
@@ -367,7 +363,7 @@ elif rubro == "Escuela del idioma":
     CMR = CM/a
 
     st.write("##### Resultado del cálculo: Monto de la venta necesaria para alcanzar la ganancia deseada")
-    st.text((c+d)/(CMR))
+    st.text(round((c+d)/(CMR)))
     st.write("##### Punto de equilibrio en venta (GTS)")
-    st.text(c/CMR)
+    st.text(round(c/CMR))
 
