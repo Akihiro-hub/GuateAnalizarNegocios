@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
-rubro = st.sidebar.selectbox("Rubro de negocio a analizar", ["Seleccione", "Carpintería", "Panadería", "Restaurante(Comedor)", "Negocio de impresión", "Construcción", "Corte y confección", "Mercadito(Pulpería)", "Escuela del idioma", "Reparación del auto", "Temas tranversales(uso de fondo)"])
+rubro = st.sidebar.selectbox("Rubro de negocio (o tema) a analizar", ["Seleccione", "Carpintería", "Panadería", "Restaurante(Comedor)", "Negocio de impresión", "Construcción", "Corte y confección", "Mercadito(Pulpería)", "Escuela del idioma", "Reparación del auto", "Tema tranversal(uso de fondo)", "Análisis de estados financieros"])
 
 if rubro == "Seleccione":
     st.write("## Análisis de negocios (PyMEs) y sus solicitudes del crédito, mediante la entrevista y la visita por el colaborador de la cooperativa")
@@ -364,6 +364,92 @@ elif rubro == "Escuela del idioma":
 
     st.write("##### Resultado del cálculo: Monto de la venta necesaria para alcanzar la ganancia deseada")
     st.text(round((c+d)/(CMR)))
-    st.write("##### Punto de equilibrio en venta (GTS)")
+    st.write("##### Punto de equilibrio en venta (GTQ)")
     st.text(round(c/CMR))
+
+elif rubro == "Análisis de estados financieros":
+    st.title("Análisis de estados financieros")
+
+
+    # Initial values
+    initial_values = {
+        "Cash": 2000,
+        "Inventory": 8000,
+        "Other current assets": 5000,
+        "Fixed assets": 25000,
+        "Short term liabilities": 10000,
+        "Long term liabilities": 10000,
+        "Capital (equity)": 20000,
+        "Annual sales": 50000,
+        "Cost of sales (production)": 25000,
+        "Administrative expenses": 15000,
+        "Financial costs": 5000
+    }
+
+    # User inputs
+    col1, col2 = st.columns(2)
+    with col1:
+        st.write("##### Resumen de Balances Generales")
+        cash = st.number_input("Efectivo", value=initial_values["Cash"])
+        inventory = st.number_input("Inventario", value=initial_values["Inventory"])
+        other_current_assets = st.number_input("Otros activos corrientes", value=initial_values["Other current assets"])
+        fixed_assets = st.number_input("Activos fijos", value=initial_values["Fixed assets"])
+        short_term_liabilities = st.number_input("Pasivos a corto plazo", value=initial_values["Short term liabilities"])
+        long_term_liabilities = st.number_input("Pasivos a largo plazo", value=initial_values["Long term liabilities"])
+        capital_equity = st.number_input("Capital propio", value=initial_values["Capital (equity)"])
+    with col2:
+        st.write("##### Resumen del Estado de Resultados")
+        
+        annual_sales = st.number_input("Ventas anuales", value=initial_values["Annual sales"])
+        cost_of_sales = st.number_input("Costo de ventas (producciones)", value=initial_values["Cost of sales (production)"])
+        admin_expenses = st.number_input("Gastos administrativos", value=initial_values["Administrative expenses"])
+        financial_costs = st.number_input("gastos financieros (pago de intereses)", value=initial_values["Financial costs"])
+
+    # Calculations
+    total_assets = cash + inventory + other_current_assets + fixed_assets
+    total_liabilities_equity = short_term_liabilities + long_term_liabilities + capital_equity
+
+    # Financial Ratios
+    current_ratio = (cash + inventory + other_current_assets) / short_term_liabilities
+    quick_ratio = (cash + other_current_assets) / short_term_liabilities
+    cash_turnover_period = cash / (annual_sales / 12)
+    gross_profit_margin = (annual_sales - cost_of_sales) / annual_sales
+    operating_income_margin = (annual_sales - cost_of_sales - admin_expenses) / annual_sales
+    net_profit_margin = (annual_sales - cost_of_sales - admin_expenses - financial_costs) / annual_sales
+    roi = (annual_sales - cost_of_sales - admin_expenses) / total_assets
+    capital_adequacy_ratio = capital_equity / total_liabilities_equity
+    times_interest_earned = (annual_sales - cost_of_sales - admin_expenses) / financial_costs
+    inventory_turnover_period = inventory / (annual_sales / 12)
+
+    if st.button("Analizar"):
+
+        # Display results
+        if total_assets != total_liabilities_equity:
+            st.warning("El monto total de activos tiene que ser igual a la suma de la deuda y el capital propio.")
+            st.metric("Margen de beneficio bruto", round(gross_profit_margin * 100, 2))
+            st.metric("Margen de beneficio operativo", round(operating_income_margin * 100, 2))
+            st.metric("Margen de beneficio neto", round(net_profit_margin * 100, 2))
+        else:
+            st.metric("Razón corriente (Current ratio) (veces)", round(current_ratio, 2))
+            st.metric("Razón rápida (Quick ratio) (veces)", round(quick_ratio, 2))
+            st.metric("Período de rotación de efectivo (Cash turnover period) (meses)", round(cash_turnover_period, 2))
+            st.metric("Margen de beneficio bruto (%)", round(gross_profit_margin * 100, 2))
+            st.metric("Margen de beneficio operativo (%)", round(operating_income_margin * 100, 2))
+            st.metric("Margen de beneficio neto (%)", round(net_profit_margin * 100, 2))
+            st.metric("ROI (Retorno sobre activos totales) (%)", round(roi * 100, 2))
+            st.metric("Razón de adecuación de capital (Capital adequacy ratio) (veces)", round(capital_adequacy_ratio * 100, 2))
+            st.metric("Veces de interés ganado (Times interest earned)", round(times_interest_earned, 2))
+            st.metric("Período de rotación de inventario (Inventory turnover period) (meses)", round(inventory_turnover_period, 2))
+
+            # Warnings
+            if current_ratio <= 1 or quick_ratio <= 0.6 or cash_turnover_period <= 0.8:
+                st.warning("El negocio puede tener dificultades en su liquidez.")
+            if operating_income_margin <= 0.05:
+                st.warning("La rentabilidad del negocio puede ser baja.")
+            if inventory_turnover_period >= 3:
+                st.warning("La eficiencia operativa, en términos de rotación de inventario puede ser baja.")
+            if cash_turnover_period >= 3:
+                st.warning("La eficiencia operativa, en términos de rotación de efectivo puede ser baja.")
+            if times_interest_earned <= 1:
+                st.warning("El negocio puede estar altamente endeudado, considerando su nivel de ganancias.")
 
