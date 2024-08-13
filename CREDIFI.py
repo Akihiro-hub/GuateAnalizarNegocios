@@ -14,7 +14,7 @@ if rubro == "Seleccione":
     with col2:
         st.image("Logo.png", width = 280)
 
-elif rubro == "Temas tranversales(uso de fondo)":
+elif rubro == "Tema tranversal(uso de fondo)":
     st.header(" :green[Puntos a analizar sobre la demanda del fondo en general]", divider="green") 
     st.write("#### :green[(1) ¿Qué tenemos que analizar la solicitud del crédito para el capital de trabajo?]") 
     st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Abajo se presentan los puntos a analizar la solicitud para el capital de trabajo.") 
