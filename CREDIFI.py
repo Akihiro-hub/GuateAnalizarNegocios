@@ -96,19 +96,8 @@ elif rubro == "Tema tranversal(uso de fondo)":
 elif rubro == "Carpintería":
     st.title("¿Cómo analizar la operación de Carpintería?")
     col1, col2 = st.columns(2)
-    with col1:
-        st.write("### :green[Lista de chequeo]")
-        OP1 = st.checkbox("En el negocio de carpinteria, el uso eficiente de maderas aserradas es uno de los temas prioritarios para aumentar las ganancias, ya que la mayoría de los costos operativos son de materias primas. ¿No tiene muchos desperdicios a desechar? ¿Buen rendimiento de materias primas (maderas)?" )
-        OP2 = st.checkbox("¿Materias primas y productos finales se guardan de manera ordenada?")
-        OP3 = st.checkbox("¿El negocio tiene el proveedor que suministra la madera aserrada de manera estable, con buenas condiciones de compras?" )
-        OP4 = st.checkbox("¿El negocio tiene ciertos clientes habituales quienes pagan con buenas condiciones, o aplica algunas medidas para estabilizar sus ventas?" )
-        OP5 = st.checkbox("¿El negocio intenta reducir el tiempo desde la compra de materias primas hasta la entrega (venta) de los productos a los clientes, para mejorar su flujo de caja?" )
-            
-        if OP1 and OP2 and OP3 and OP4 and OP5:
-            st.toast("¡Probablemente bien operándose!")
-            st.balloons()
 
-    with col2:
+    with col1:
         st.write("### :blue[Necesidades del capital de trabajo]")
         st.write("###### El costo de materia prima, sobre todo, maderas aserradas, representa la proporción alta en todos los costos de producción. La demanda del capital de trabajo se puede reducir, mediante (i) el aumento del rendimiento de las materias primas, y/o (ii) la reducción del tiempo entre la compra de materia prima y la venta de productos a los clientes.")
         st.write("###### La cooperativa deberá analizar (i) si el monto solicitado para el crédito será apropiado considerando el volumen del inventario, (ii) si el negocio utiliza eficientemente las materias primas, etc.")
@@ -117,28 +106,68 @@ elif rubro == "Carpintería":
         st.write("###### La inversión para el equipo es necesario, al inicio del negocio o al momento de expansión del mismo. El valor económico de la inversión necesaria se varía mucho, dependinedo del equipo a invertir.")
         st.write("###### La cooperativa deberá analizar (i) si el negocio tiene suficiente espacio para instalar el equipo a comprar, (ii) si el negocio podrá aguantar la elevación del monto necesario del capital de trabajo a generar por la inversión, (iii) otras alternativas que podrán aumentar la producitividad sin inversión, etc.")
 
-    st.header(" :red[Calculador del inventario de seguridad]", divider="red") 
-    st.write("###### :red[Es importante calcular el volumen del inventario de seguridad, que se refiere a la cantidad necesaria a mantener siempre para evitar escasez, en ciertas materias importnates, como maderas aserradas en la carpintería.]")  
+    with col2:
+        st.write("### :green[Lista de chequeo]")
+        st.write("##### :green[Marque todos los puntos que la empresa ha logrado.]")
+        OP1 = st.checkbox("En el negocio de carpinteria, el uso eficiente de maderas aserradas es uno de los temas prioritarios para aumentar las ganancias, ya que la mayoría de los costos operativos son de materias primas. ¿No tiene muchos desperdicios a desechar? ¿Buen rendimiento de materias primas (maderas)?")
+        OP2 = st.checkbox("¿Materias primas y productos finales se guardan de manera ordenada?")
+        OP3 = st.checkbox("¿El negocio tiene el proveedor que suministra la madera aserrada de manera estable, con buenas condiciones de compras?")
+        OP4 = st.checkbox("¿El negocio tiene ciertos clientes habituales quienes pagan con buenas condiciones, o aplica algunas medidas para estabilizar sus ventas?")
+        OP5 = st.checkbox("¿El negocio intenta reducir el tiempo desde la compra de materias primas hasta la entrega (venta) de los productos a los clientes, para mejorar su flujo de caja?")
 
-    a = st.number_input("¿Hace 5 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 30)
-    b = st.number_input("¿Hace 4 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 25)
-    c = st.number_input("¿Hace 3 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 45)
-    d = st.number_input("¿Hace 2 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 37)
-    e = st.number_input("¿Ayer (o semana pasada) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 18)
-    g = st.number_input("¿Cuánto días (o semanas) debe esperar la recepción de maderas después de la colocación de la orden?", 0, 300, 5)
-    data = [a, b, c, d, e]
-    SD = np.std(data, ddof=1) 
-    import math
-    Inventario_seguridad1 = 2.33 * SD * math.sqrt(g)
-    Inventario_seguridad5 = 1.64 * SD * math.sqrt(g)   
-    Inventario_seguridad10 = 1.28 * SD * math.sqrt(g)
-    st.write("##### Resultado de cálculo:") 
-    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 1% (piezas)")
-    st.text(round(Inventario_seguridad1))
-    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 5% (piezas)")
-    st.text(round(Inventario_seguridad5))
-    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 10% (piezas)")
-    st.text(round(Inventario_seguridad10))
+    if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
+        st.write("## :blue[Sugerencias]")
+        
+        selected_count = sum([OP1, OP2, OP3, OP4, OP5])
+
+        
+        # Mensaje principal basado en la cantidad de selecciones
+        if selected_count == 5:
+            st.write("Probablemente el negocio operaría apropiadamente.")
+            st.balloons()
+        elif selected_count in [3, 4]:
+            st.write("El negocio tendrá que mejorar sus operaciones en ciertos puntos.")
+        else:
+            st.write("El negocio tiene que fortalecerse.")
+        
+        # Mensajes adicionales para checkboxes no seleccionados
+        if not OP1:
+            st.write("El rendimiento de materias primas se podrá mejorar, mediante el diseño apropiado de los productos, el desarrollo de nuevos productos de segunda línea utilizando pedazos de la madera, el aumento de las órdenes con el volumen suficiente, el procesamiento de las maderas aserradas después de la recepción de las ordenes, etc.")
+        if not OP2:
+            st.write("El taller desordenado podrá causar la ineficiencia operativa, aumentando la demanda del capital de trabajo.")
+        if not OP3:
+            st.write("El suministro estable de la materia prima es esencial, ya que la mayoría de los costos operativos del negocio de la carpintería son de la materia prima.")
+        if not OP4:
+            st.write("El aumento de clientes habituales podrá causar la venta estable y la mejora de la eficiencia operativa.")
+        if not OP5:
+            st.write("El tiempo largo entre la compra de materias primas hasta la entrega de los productos a los clientes, aumentará la demanda del capital de trabajo.")
+        
+        # Mensaje final obligatorio
+        st.write("Si la empresa se dedica principalmente a la producción prospectiva para el inventario y vende alta variedad de productos, será esencial aumentar (1) la proporción de producción basada de las órdenes de los clientes y (2) los productos con diseños semejantes, reduciendo el coste de las materias primas y aumentando los beneficios, con ventas estables. Es importante que la empresa mantenga el inventario de maderas aserradas de seguridad con el volumen apropiado. Si el negocio tiene el inventario en exceso, tendrá dificultades en su liquidez financiero, además de aumento del riesgo de corrosión de la madera. Por el contrario, si las existencias de materias primas son bajas demasiado, existe el riesgo de perder oportunidades por no poder atender los pedidos de los clientes.")
+        st.write("La siguiente calculadora puede identificar el volumen del inventario de seguridad, que determina a la vez la cantidad necesaria del capital de trabajo.")
+            
+        st.header(" :red[Calculador del inventario de seguridad]", divider="red") 
+        st.write("###### :red[Es importante calcular el volumen del inventario de seguridad, que se refiere a la cantidad necesaria a mantener siempre para evitar escasez, en ciertas materias importnates, como maderas aserradas en la carpintería.]")  
+
+        a = st.number_input("¿Hace 5 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 30)
+        b = st.number_input("¿Hace 4 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 25)
+        c = st.number_input("¿Hace 3 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 45)
+        d = st.number_input("¿Hace 2 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 37)
+        e = st.number_input("¿Ayer (o semana pasada) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 18)
+        g = st.number_input("¿Cuánto días (o semanas) debe esperar la recepción de maderas después de la colocación de la orden?", 0, 300, 5)
+        data = [a, b, c, d, e]
+        SD = np.std(data, ddof=1) 
+        import math
+        Inventario_seguridad1 = 2.33 * SD * math.sqrt(g)
+        Inventario_seguridad5 = 1.64 * SD * math.sqrt(g)   
+        Inventario_seguridad10 = 1.28 * SD * math.sqrt(g)
+        st.write("##### Resultado de cálculo:") 
+        st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 1% (piezas)")
+        st.text(round(Inventario_seguridad1))
+        st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 5% (piezas)")
+        st.text(round(Inventario_seguridad5))
+        st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 10% (piezas)")
+        st.text(round(Inventario_seguridad10))
 
 elif rubro == "Panadería":
     st.title("¿Cómo analizar la operación de Panadería?")
