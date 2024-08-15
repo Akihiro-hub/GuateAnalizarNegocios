@@ -2,9 +2,6 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
-st.set_page_config(page_title="GuateAnalizarNegocios", layout="wide", initial_sidebar_state="expanded", reload_interval=86400)
-
-
 rubro = st.sidebar.selectbox("Rubro de negocio (o tema) a analizar", ["Seleccione", "Carpintería", "Panadería", "Restaurante(Comedor)", "Negocio de impresión", "Construcción", "Corte y confección", "Mercadito(Pulpería)", "Escuela del idioma", "Reparación del auto", "Tema tranversal(uso de fondo)", "Análisis de estados financieros"])
 
 if rubro == "Seleccione":
