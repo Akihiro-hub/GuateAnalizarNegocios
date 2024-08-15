@@ -2,6 +2,16 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
+import time
+# Streamlitアプリのメイン処理
+def main():
+    # ... (通常のStreamlitアプリのコード)
+
+if __name__ == "__main__":
+    while True:
+        main()
+        time.sleep(360*360)  # 6時間ごとにアプリを再起動
+
 rubro = st.sidebar.selectbox("Rubro de negocio (o tema) a analizar", ["Seleccione", "Carpintería", "Panadería", "Restaurante(Comedor)", "Negocio de impresión", "Construcción", "Corte y confección", "Mercadito(Pulpería)", "Escuela del idioma", "Reparación del auto", "Tema tranversal(uso de fondo)", "Análisis de estados financieros"])
 
 if rubro == "Seleccione":
