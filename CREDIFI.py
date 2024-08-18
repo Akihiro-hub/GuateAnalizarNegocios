@@ -52,9 +52,8 @@ elif rubro == "Capital de trabajo":
         g = st.number_input("Cuentas por cobrar (GTQ)", 1, 1000000000000, 4000)
         h = e + g - f
         
-        if st.button("Calcular"):        
-            st.write("##### Resultado del cálculo: Monto total necesario del capital de trabajo normal (GTQ):")
-            st.text(h)
+        st.write("##### Resultado del cálculo: Monto total necesario del capital de trabajo normal (GTQ):")
+        st.text(h)
 
 elif rubro == "Capital de inversiones":
     st.write("#### :green[¿Qué tenemos que analizar la solicitud del crédito para el capital de inversión?]") 
@@ -98,17 +97,6 @@ elif rubro == "Capital de inversiones":
         st.write("#### Valor Presente Neto (VPN) de la inversión (GTQ):")
         st.text(f"VPN: {round(npv)}")
         st.write("###### :blue[La inversion con VPN negativo o insuficiente deberá rechazarse.]")
-
-        st.header(" :blue[Herramienta de referencia]", divider="blue") 
-        st.write("###### :blue[El monto disponible para prestar dependerá de (i) cuota mensual a poder pagar, (ii) tasa de interés, y (iii) período de amortización, como se puede calcular mediante esta herramienta.]")
-        a = st.number_input("Cuota mensual (GTQ)", 0, 1000000000, 2000)
-        b = st.number_input("Tasa anual de interés %", 0, 100, 18)
-        c = st.number_input("periodo de amortización (meses)", 0, 100, 12)
-        d = (a * ((1 + b/1200)**c - 1)) / (b/1200 * (1 + b/1200)**c)
-    
-        if st.button("Analizar"):   
-            st.write("##### :blue[Resultado del cálculo: Monto total disponible para el crédito (GTQ):]")
-            st.text(round(d))
 
 elif rubro == "Carpintería":
     st.title("¿Cómo analizar la operación de Carpintería?")
@@ -177,14 +165,14 @@ elif rubro == "Carpintería":
         Inventario_seguridad1 = 2.33 * SD * math.sqrt(g)
         Inventario_seguridad5 = 1.64 * SD * math.sqrt(g)   
         Inventario_seguridad10 = 1.28 * SD * math.sqrt(g)
-        if st.button("Analizar"):
-            st.write("##### Resultado de cálculo:") 
-            st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 1% (piezas)")
-            st.text(round(Inventario_seguridad1))
-            st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 5% (piezas)")
-            st.text(round(Inventario_seguridad5))
-            st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 10% (piezas)")
-            st.text(round(Inventario_seguridad10))
+
+        st.write("##### Resultado de cálculo:") 
+        st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 1% (piezas)")
+        st.text(round(Inventario_seguridad1))
+        st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 5% (piezas)")
+        st.text(round(Inventario_seguridad5))
+        st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 10% (piezas)")
+        st.text(round(Inventario_seguridad10))
 
 elif rubro == "Panadería":
     st.title("¿Cómo analizar la operación de Panadería?")
@@ -249,13 +237,11 @@ elif rubro == "Panadería":
         CM = a-b
         CMR = CM/a
 
-        if st.button("Calcular"):
-            st.write("##### Monto de la venta necesaria para alcanzar la ganancia deseada (GTQ)")
-            st.text(round((c+d)/(CMR)))
-            st.write("##### Punto de equilibrio en venta (GTQ)")
-            st.text(round(c/CMR))
+        st.write("##### Monto de la venta necesaria para alcanzar la ganancia deseada (GTQ)")
+        st.text(round((c+d)/(CMR)))
+        st.write("##### Punto de equilibrio en venta (GTQ)")
+        st.text(round(c/CMR))
                     
-
 elif rubro == "Restaurante(Comedor)":
     st.title("¿Como analizar la operación de Restaurante/Comedor?")
 
@@ -313,11 +299,11 @@ elif rubro == "Restaurante(Comedor)":
         st.write("###### :red[La tasa de ocupacion puede ser 50%, ya que sólo dos personas pueden ocupar la mesa para cuatro personas. La rotacion de los clientes al día puede ser 4 o 5 veces, como 2 rotaciones a horas de almuerzo y 2 rotaciones a horas de cena.]")
         
         E = a*d*(b/100)*c
-        if st.button("Analizar"):
-            st.write("##### Resultado del cálculo: Monto esperado de la venta diaria")
-            st.text(E)
-            st.write("##### Resultado del cálculo: Monto esperado de la venta mensual")
-            st.text(E*e)
+
+        st.write("##### Resultado del cálculo: Monto esperado de la venta diaria")
+        st.text(E)
+        st.write("##### Resultado del cálculo: Monto esperado de la venta mensual")
+        st.text(E*e)
             
 elif rubro == "Negocio de impresión":
     st.title("¿Cómo analizar la operación del Negocio de impresión?")
@@ -403,7 +389,7 @@ elif rubro == "Construcción":
             st.write("El manejo del capital de trabajo es uno de los temas pripriotarios en el negocio de construcción. Si el negocio debe mantener cierto volumen del inventario de materias primas, tendrá que identificar el volumen apropiado a mantener.")
         
         # Mensaje final obligatorio
-        st.write("En el negocio de construccíon, la demanda depende mucho de la economía local y su flujo circulante de fondos. Además, el mismo negocio puede generar la demanda de otras industrias. En este sentido, es importante analizar tambien el entorno del negocio también para el desarrollo del negocio.")
+        st.write("En el negocio de construcción, la demanda depende mucho de la economía local y su flujo circulante de fondos. Además, el mismo negocio puede generar la demanda de otras industrias. En este sentido, es importante analizar tambien el entorno del negocio también para el desarrollo del negocio.")
 
 elif rubro == "Corte y confección":
     st.title("¿Cómo analizar la operación del negocio de Corte y confección?")
@@ -612,6 +598,12 @@ elif rubro == "Análisis de estados financieros":
             st.metric("Margen de beneficio operativo", round(operating_income_margin * 100, 2))
             st.metric("Margen de beneficio neto", round(net_profit_margin * 100, 2))
         else:
+         # Mensaje final obligatorio
+            st.write("Será muy ideal que Razón corriente sea 2 veces o más y Razón rápida sea 1 vez o más, segun muchos libros de texto")
+            st.write("Períodos de rotación de efectivo e inventario no tienen que ser mucho ni poco. Mucho período significa la ineficiencia operativa, y poco período quiere decir la falta de dichos recursos.")
+            st.write("El resultado del flujo de caja de la emperesa se presenta abajo. Si el flujo de caja en operación es positiva, el negocio genera beneficios para hacer inversiones en muchos casos. Si el flujo de caja en inversiones es poistiva, el negocio posiblemente vende sus activos fijos para cubrir las pérdidas operativas o pagos de deuda. Si el flujo de caja en finanzas es positivo, la empresa utiliza los préstamos para sus operaciones y/o inversiones.")
+    
+            col1, col2 = st.columns(2)
             with col1:
                 st.write("##### Indicadores de estabilidad y liquidez")
                 st.metric("Razón corriente (Current ratio) (veces)", round(current_ratio, 2))
@@ -626,21 +618,25 @@ elif rubro == "Análisis de estados financieros":
                 st.metric("Margen de beneficio operativo (%)", round(operating_income_margin * 100, 2))
                 st.metric("Margen de beneficio neto (%)", round(net_profit_margin * 100, 2))
                 st.metric("Período de rotación de inventario (Inventory turnover period) (meses)", round(inventory_turnover_period, 2))
-
-            # Mensaje final obligatorio
-            st.write("Será muy ideal que Razón corriente sea 2 veces o más y Razón rápida sea 1 vez o más, segun muchos libros de texto")
-            st.write("Períodos de rotación de efectivo e inventario no tienen que ser mucho ni poco. Mucho período significa la ineficiencia operativa, y poco período quiere decir la falta de dichos recursos.")
-            st.write("El resultado del flujo de caja de la emperesa se presenta abajo. Si el flujo de caja en operación es positiva, el negocio genera beneficios para hacer inversiones en muchos casos. Si el flujo de caja en inversiones es poistiva, el negocio posiblemente vende sus activos fijos para cubrir las pérdidas operativas o pagos de deuda. Si el flujo de caja en finanzas es positivo, la empresa utiliza los préstamos para sus operaciones y/o inversiones.")
-
+                
+             # Warnings
+            if current_ratio <= 1 or quick_ratio <= 0.6 or cash_turnover_period <= 0.8:
+                st.warning("El negocio puede tener dificultades en su liquidez.")
+            if operating_income_margin <= 0.05:
+                st.warning("La rentabilidad del negocio puede ser baja.")
+            if inventory_turnover_period >= 3:
+                st.warning("La eficiencia operativa, en términos de rotación de inventario puede ser baja.")
+            if cash_turnover_period >= 3:
+                st.warning("La eficiencia operativa, en términos de rotación de efectivo puede ser baja.")
+            if times_interest_earned <= 1 or capital_adequacy_ratio <= 0.5:
+                st.warning("El negocio puede estar altamente endeudado, considerando su nivel de ganancias o nivel del capital propio.")
+            
             # Data for plotting
-            cashflows = {
+            cashflows = {                
                 'Flujo de caja en Operación': OperationalCF,
                 'Flujo de caja en Inversión': InvestmentCF,
                 'Flujo de caja en Finanzas': FinancialCF
             }
-
-            # Colors based on value
-            colors = ['blue' if value >= 0 else 'red' for value in cashflows.values()]
 
             # Plotting
             fig, ax = plt.subplots()
@@ -656,15 +652,5 @@ elif rubro == "Análisis de estados financieros":
             # Display in Streamlit
             st.pyplot(fig)
 
-            # Warnings
-            if current_ratio <= 1 or quick_ratio <= 0.6 or cash_turnover_period <= 0.8:
-                st.warning("El negocio puede tener dificultades en su liquidez.")
-            if operating_income_margin <= 0.05:
-                st.warning("La rentabilidad del negocio puede ser baja.")
-            if inventory_turnover_period >= 3:
-                st.warning("La eficiencia operativa, en términos de rotación de inventario puede ser baja.")
-            if cash_turnover_period >= 3:
-                st.warning("La eficiencia operativa, en términos de rotación de efectivo puede ser baja.")
-            if times_interest_earned <= 1 or capital_adequacy_ratio <= 0.5:
-                st.warning("El negocio puede estar altamente endeudado, considerando su nivel de ganancias o nivel del capital propio.")
+
 
