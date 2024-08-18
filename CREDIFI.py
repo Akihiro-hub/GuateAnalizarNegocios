@@ -627,7 +627,7 @@ elif rubro == "Análisis de estados financieros":
             if times_interest_earned <= 1 or capital_adequacy_ratio <= 0.5:
                 st.warning("El negocio puede estar altamente endeudado, considerando su nivel de ganancias o nivel del capital propio.")
             
-            st.write("El resultado del flujo de caja de la emperesa se presenta abajo. Si el flujo de caja en operación es positiva, el negocio genera beneficios para hacer inversiones en muchos casos. Si el flujo de caja en inversiones es poistiva, el negocio posiblemente vende sus activos fijos para cubrir las pérdidas operativas o pagos de deuda. Si el flujo de caja en finanzas es positivo, la empresa utiliza los préstamos para sus operaciones y/o inversiones.")
+            st.write("El resultado del flujo de caja de la emperesa se presenta abajo. Si el flujo de caja en operación es positivo, el negocio genera beneficios para hacer inversiones en muchos casos. Si el flujo de caja en inversiones es poistivo, el negocio posiblemente vende sus activos fijos para cubrir las pérdidas operativas o pagos de deuda. Si el flujo de caja en finanzas es positivo, la empresa utiliza los préstamos para sus operaciones y/o inversiones.")
             # Cashflow values
             OperationalCF = annual_sales - cost_of_sales - admin_expenses - financial_costs + inventory0 - inventory
             InvestmentCF = fixed_assets0 - fixed_assets
