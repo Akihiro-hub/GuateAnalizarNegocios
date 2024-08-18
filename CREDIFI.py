@@ -573,10 +573,6 @@ elif rubro == "Análisis de estados financieros":
     # Calculations
     total_assets = cash + inventory + other_current_assets + fixed_assets
     total_liabilities_equity = short_term_liabilities + long_term_liabilities + capital_equity
-    
-    OperationalCF = annual_sales - cost_of_sales - admin_expenses - financial_costs + inventory0 - inventory
-    InvestmentCF = fixed_assets0 - fixed_assets
-    FinancialCF = short_term_liabilities + long_term_liabilities - liabilities0 
 
     # Financial Ratios
     current_ratio = (cash + inventory + other_current_assets) / short_term_liabilities
@@ -631,7 +627,12 @@ elif rubro == "Análisis de estados financieros":
                 st.warning("La eficiencia operativa, en términos de rotación de efectivo puede ser baja.")
             if times_interest_earned <= 1 or capital_adequacy_ratio <= 0.5:
                 st.warning("El negocio puede estar altamente endeudado, considerando su nivel de ganancias o nivel del capital propio.")
-            
+
+            # Cashflow values
+            OperationalCF = annual_sales - cost_of_sales - admin_expenses - financial_costs + inventory0 - inventory
+            InvestmentCF = fixed_assets0 - fixed_assets
+            FinancialCF = short_term_liabilities + long_term_liabilities - liabilities0 
+           
             # Data for plotting
             cashflows = {                
                 'Flujo de caja en Operación': OperationalCF,
@@ -639,10 +640,13 @@ elif rubro == "Análisis de estados financieros":
                 'Flujo de caja en Finanzas': FinancialCF
             }
 
+            # Colors based on value
+            colors = ['blue' if value >= 0 else 'red' for value in cashflows.values()]
+            
             # Plotting
             fig, ax = plt.subplots()
             ax.barh(list(cashflows.keys()), list(cashflows.values()), color=colors)
-
+            
             # Adding labels
             for index, value in enumerate(cashflows.values()):
                 ax.text(value, index, f'{value}', va='center', ha='left' if value >= 0 else 'right')
