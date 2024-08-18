@@ -525,7 +525,7 @@ elif rubro == "Reparación del auto":
                 st.balloons()
             elif selected_count in [2, 3]:
                 st.write("El negocio tendrá que mejorar sus operaciones en ciertos puntos.")
-                else:
+            else:
                 st.write("El negocio tiene que fortalecerse.")
             
         # Mensajes adicionales para checkboxes no seleccionados
