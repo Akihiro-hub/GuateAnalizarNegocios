@@ -596,10 +596,9 @@ elif rubro == "Análisis de estados financieros":
             st.metric("Margen de beneficio neto", round(net_profit_margin * 100, 2))
         else:
          # Mensaje final obligatorio
-            st.write("Será muy ideal que Razón corriente sea 2 veces o más y Razón rápida sea 1 vez o más, segun muchos libros de texto")
+            st.write("Será muy ideal que la Razón corriente sea 2 veces o más y la Razón rápida sea 1 vez o más, segun muchos libros de texto, aunque tales libros no son realísticos en algunos casos.")
             st.write("Períodos de rotación de efectivo e inventario no tienen que ser mucho ni poco. Mucho período significa la ineficiencia operativa, y poco período quiere decir la falta de dichos recursos.")
-            st.write("El resultado del flujo de caja de la emperesa se presenta abajo. Si el flujo de caja en operación es positiva, el negocio genera beneficios para hacer inversiones en muchos casos. Si el flujo de caja en inversiones es poistiva, el negocio posiblemente vende sus activos fijos para cubrir las pérdidas operativas o pagos de deuda. Si el flujo de caja en finanzas es positivo, la empresa utiliza los préstamos para sus operaciones y/o inversiones.")
-    
+            
             col1, col2 = st.columns(2)
             with col1:
                 st.write("##### Indicadores de estabilidad y liquidez")
@@ -627,7 +626,8 @@ elif rubro == "Análisis de estados financieros":
                 st.warning("La eficiencia operativa, en términos de rotación de efectivo puede ser baja.")
             if times_interest_earned <= 1 or capital_adequacy_ratio <= 0.5:
                 st.warning("El negocio puede estar altamente endeudado, considerando su nivel de ganancias o nivel del capital propio.")
-
+            
+            st.write("El resultado del flujo de caja de la emperesa se presenta abajo. Si el flujo de caja en operación es positiva, el negocio genera beneficios para hacer inversiones en muchos casos. Si el flujo de caja en inversiones es poistiva, el negocio posiblemente vende sus activos fijos para cubrir las pérdidas operativas o pagos de deuda. Si el flujo de caja en finanzas es positivo, la empresa utiliza los préstamos para sus operaciones y/o inversiones.")
             # Cashflow values
             OperationalCF = annual_sales - cost_of_sales - admin_expenses - financial_costs + inventory0 - inventory
             InvestmentCF = fixed_assets0 - fixed_assets
