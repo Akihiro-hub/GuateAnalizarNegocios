@@ -52,7 +52,12 @@ elif rubro == "Capital de trabajo":
         f = st.number_input("Cuentas por pagar (GTQ)", 1, 10000000000000, 2000)
         g = st.number_input("Cuentas por cobrar (GTQ)", 1, 1000000000000, 4000)
         h = e + g - f
-        
+
+        # Update session state
+        st.session_state.inventory_value = e
+        st.session_state.accounts_payable = f
+        st.session_state.accounts_receivable = g
+
         st.write("##### Resultado del cálculo: Monto total necesario del capital de trabajo normal (GTQ):")
         st.text(h)
 
@@ -88,7 +93,13 @@ elif rubro == "Capital de inversiones":
         b = st.number_input("¿Cuál es tasa de costo del capital del negocio (%)?", 0, 100, 12)
         c = st.number_input("¿Cuánto podrá ganar al año por el proyecto de inversión? (De manera más precisa tiene que decirse como el flujo anual de caja, que es casi igual a ganancias menos depreciación: GTQ)", 1, 1000000000000, 20000)
         d = st.number_input("Duración del proyecto (años)", 1, 100, 4)
-        
+
+        # Update session state
+        st.session_state.a = a
+        st.session_state.b = b
+        st.session_state.c = c
+        st.session_state.d = d        
+
         lst = [c for i in range(d)]
         lst0 = [-1 * a]
         lst = lst0 + lst
@@ -160,6 +171,15 @@ elif rubro == "Carpintería":
         d = st.number_input("¿Hace 2 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 37)
         e = st.number_input("¿Ayer (o semana pasada) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 18)
         g = st.number_input("¿Cuánto días (o semanas) debe esperar la recepción de maderas después de la colocación de la orden?", 0, 300, 5)
+        
+         # Update session state
+        st.session_state.a = a
+        st.session_state.b = b
+        st.session_state.c = c
+        st.session_state.d = d     
+        st.session_state.c = e
+        st.session_state.d = g   
+        
         data = [a, b, c, d, e]
         SD = np.std(data, ddof=1) 
         import math
@@ -238,6 +258,11 @@ elif rubro == "Panadería":
         CM = a-b
         CMR = CM/a
 
+        st.session_state.a = a
+        st.session_state.b = b 
+        st.session_state.c = c
+        st.session_state.d = d   
+
         st.write("##### Monto de la venta necesaria para alcanzar la ganancia deseada (GTQ)")
         st.text(round((c+d)/(CMR)))
         st.write("##### Punto de equilibrio en venta (GTQ)")
@@ -297,8 +322,15 @@ elif rubro == "Restaurante(Comedor)":
         c = st.number_input("Veces estimadas de rotación de los clientes al día", 1, 10, 3)
         d = st.number_input("Promedio estimado de la venta por cliente (GTS)", 1, 1000, 40)
         e = st.number_input("Días de operación al mes (Días)", 1, 31, 25)
-        st.write("###### :red[La tasa de ocupacion puede ser 50%, ya que sólo dos personas pueden ocupar la mesa para cuatro personas. La rotacion de los clientes al día puede ser 4 o 5 veces, como 2 rotaciones a horas de almuerzo y 2 rotaciones a horas de cena.]")
         
+        st.session_state.a = a
+        st.session_state.b = b 
+        st.session_state.c = c
+        st.session_state.d = d   
+        st.session_state.e = e
+
+    
+        st.write("###### :red[La tasa de ocupacion puede ser 50%, ya que sólo dos personas pueden ocupar la mesa para cuatro personas. La rotacion de los clientes al día puede ser 4 o 5 veces, como 2 rotaciones a horas de almuerzo y 2 rotaciones a horas de cena.]")
         E = a*d*(b/100)*c
 
         st.write("##### Resultado del cálculo: Monto esperado de la venta diaria")
