@@ -539,11 +539,11 @@ elif rubro == "Análisis de estados financieros":
         "Capital (equity)": 20000,
         "Annual sales": 50000,
         "Cost of sales (production)": 25000,
-        "Administrative expenses": 15000,
+        "Administrative expenses": 19000,
         "Financial costs": 5000,
-        "Inventory0": 4000,
-        "Fixed assets0": 40000,    
-        "liabilities0": 10000,            
+        "Inventory0": 1000,
+        "Fixed assets0": 31000,    
+        "liabilities0": 17000,            
     }
 
     # User inputs
