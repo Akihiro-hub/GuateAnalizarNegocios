@@ -542,7 +542,7 @@ elif rubro == "Análisis de estados financieros":
         "Administrative expenses": 19000,
         "Financial costs": 5000,
         "Inventory0": 1000,
-        "Fixed assets0": 31000,    
+        "Fixed assets0": 29000,    
         "liabilities0": 17000,            
     }
 
@@ -605,16 +605,16 @@ elif rubro == "Análisis de estados financieros":
                 st.write("##### Indicadores de estabilidad y liquidez")
                 st.metric("Razón corriente (Current ratio) (veces)", round(current_ratio, 2))
                 st.metric("Razón rápida (Quick ratio) (veces)", round(quick_ratio, 2))
-                st.metric("Período de rotación de efectivo (Cash turnover period) (meses)", round(cash_turnover_period, 2))
-                st.metric("Razón de adecuación de capital (Capital adequacy ratio) (veces)", round(capital_adequacy_ratio * 100, 2))
-                st.metric("Veces de interés ganado (Times interest earned)", round(times_interest_earned, 2))   
+                st.metric("Período de rotación de efectivo (meses)", round(cash_turnover_period, 2))
+                st.metric("Razón de adecuación de capital (veces)", round(capital_adequacy_ratio * 100, 2))
+                st.metric("Veces de interés ganado (veces)", round(times_interest_earned, 2))   
             with col2:
-                st.metric("ROI (Retorno sobre activos totales) (%)", round(roi * 100, 2))
                 st.write("##### Indicadores de rentabilidad y eficiencia")
+                st.metric("ROI (Retorno sobre activos totales) (%)", round(roi * 100, 2))
                 st.metric("Margen de beneficio bruto (%)", round(gross_profit_margin * 100, 2))
                 st.metric("Margen de beneficio operativo (%)", round(operating_income_margin * 100, 2))
                 st.metric("Margen de beneficio neto (%)", round(net_profit_margin * 100, 2))
-                st.metric("Período de rotación de inventario (Inventory turnover period) (meses)", round(inventory_turnover_period, 2))
+                st.metric("Período de rotación de inventario (meses)", round(inventory_turnover_period, 2))
                 
              # Warnings
             if current_ratio <= 1 or quick_ratio <= 0.6 or cash_turnover_period <= 0.8:
