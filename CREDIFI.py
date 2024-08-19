@@ -39,8 +39,6 @@ elif rubro == "Capital de trabajo":
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
         st.session_state.show_calculator = True
 
-    # 計算ツールの表示を制御する部分
-    if st.session_state.show_calculator:
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4])
         # メインメッセージを選択数に基づいて表示
@@ -49,7 +47,9 @@ elif rubro == "Capital de trabajo":
             st.balloons()
         else:
             st.write("La demanda del capital de trabajo se aumentará por (i) la ineficiencia operativa, y (ii) condiciones inapropiadas de compras y ventas. Si la ineficiencia operativa genera la demanda adicional del capital, es importante asesorar el negocio con miras a su mejora.")
-        
+
+        # 計算ツールの表示を制御する部分
+        if st.session_state.show_calculator:        
         # 計算ツールの部分
         st.write("La siguiente calculadora puede identificar el monto total necesario del capital de trabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
         
