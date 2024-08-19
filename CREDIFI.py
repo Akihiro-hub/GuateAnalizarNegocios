@@ -77,6 +77,7 @@ elif rubro == "Capital de inversiones":
     OP5 = st.checkbox("¿El negocio tiene suficiente espacio para instalar el equipo a comprar?")
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
+        st.session_state.show_calculator = True
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4, OP5])
         # Mensaje principal basado en la cantidad de selecciones
@@ -85,27 +86,29 @@ elif rubro == "Capital de inversiones":
             st.balloons()
         else:
             st.write("La inversión puede generar no sólo el aumento de la producción sino tambien el aumento de costos operativos, posiblemente cansando la falta de liquidez del negocio. Por lo cual, es importante analizar si la inversión será oportuna o no, considerando la situación de mercado, o sea, la demanda de cliente, y la competencia con sus competidores.")
-
-    # Mensaje final obligatorio
-    st.write("Es importante analizar si el proyecto de la inversión es apropiada o no, aplicando la siguiente calculadora.")
-
-    st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
-    st.write("###### :blue[Calculadora del valor presente neto del proyecto]")  
-    a = st.number_input("¿Cuánto se debe invertir al inicio del proyecto (GTQ)?", 0, 10000000000000, 50000)
-    b = st.number_input("¿Cuál es tasa de costo del capital del negocio (%)?", 0, 100, 12)
-    c = st.number_input("¿Cuánto podrá ganar al año por el proyecto de inversión? (De manera más precisa tiene que decirse como el flujo anual de caja, que es casi igual a ganancias menos depreciación: GTQ)", 1, 1000000000000, 20000)
-    d = st.number_input("Duración del proyecto (años)", 1, 100, 4)
-
-
-    lst = [c for i in range(d)]
-    lst0 = [-1 * a]
-    lst = lst0 + lst
-    npv = sum(lst / (1 + b/100) ** t for t, lst in enumerate(lst)) 
-    rate = b/100
-        
-    st.write("#### Valor Presente Neto (VPN) de la inversión (GTQ):")
-    st.text(f"VPN: {round(npv)}")
-    st.write("###### :blue[La inversion con VPN negativo o insuficiente deberá rechazarse.]")
+    
+    # 計算ツールの表示
+    if st.session_state.show_calculator:
+        # Mensaje final obligatorio
+        st.write("Es importante analizar si el proyecto de la inversión es apropiada o no, aplicando la siguiente calculadora.")
+    
+        st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
+        st.write("###### :blue[Calculadora del valor presente neto del proyecto]")  
+        a = st.number_input("¿Cuánto se debe invertir al inicio del proyecto (GTQ)?", 0, 10000000000000, 50000)
+        b = st.number_input("¿Cuál es tasa de costo del capital del negocio (%)?", 0, 100, 12)
+        c = st.number_input("¿Cuánto podrá ganar al año por el proyecto de inversión? (De manera más precisa tiene que decirse como el flujo anual de caja, que es casi igual a ganancias menos depreciación: GTQ)", 1, 1000000000000, 20000)
+        d = st.number_input("Duración del proyecto (años)", 1, 100, 4)
+    
+    
+        lst = [c for i in range(d)]
+        lst0 = [-1 * a]
+        lst = lst0 + lst
+        npv = sum(lst / (1 + b/100) ** t for t, lst in enumerate(lst)) 
+        rate = b/100
+            
+        st.write("#### Valor Presente Neto (VPN) de la inversión (GTQ):")
+        st.text(f"VPN: {round(npv)}")
+        st.write("###### :blue[La inversion con VPN negativo o insuficiente deberá rechazarse.]")
 
 elif rubro == "Carpintería":
     st.title("¿Cómo analizar la operación de Carpintería?")
@@ -130,6 +133,7 @@ elif rubro == "Carpintería":
         OP5 = st.checkbox("¿El negocio intenta reducir el tiempo desde la compra de materias primas hasta la entrega (venta) de los productos a los clientes, para mejorar su flujo de caja?")
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
+        st.session_state.show_calculator = True
         st.write("## :blue[Sugerencias]")
         
         selected_count = sum([OP1, OP2, OP3, OP4, OP5])
@@ -154,36 +158,38 @@ elif rubro == "Carpintería":
             st.write("El aumento de clientes habituales podrá causar la venta estable y la mejora de la eficiencia operativa.")
         if not OP5:
             st.write("El tiempo largo entre la compra de materias primas hasta la entrega de los productos a los clientes, aumentará la demanda del capital de trabajo.")
+    
+    # 計算ツールの表示
+    if st.session_state.show_calculator:
         
         # Mensaje final obligatorio
         st.write("Si la empresa se dedica principalmente a la producción prospectiva para el inventario y vende alta variedad de productos, será esencial aumentar (1) la proporción de producción basada de las órdenes de los clientes y (2) los productos con diseños semejantes, reduciendo el coste de las materias primas y aumentando los beneficios, con ventas estables. Es importante que la empresa mantenga el inventario de maderas aserradas de seguridad con el volumen apropiado. Si el negocio tiene el inventario en exceso, tendrá dificultades en su liquidez financiero, además de aumento del riesgo de corrosión de la madera. Por el contrario, si las existencias de materias primas son bajas demasiado, existe el riesgo de perder oportunidades por no poder atender los pedidos de los clientes.")
         st.write("La siguiente calculadora puede identificar el volumen del inventario de seguridad, que determina a la vez la cantidad necesaria del capital de trabajo.")
             
-    st.header(" :red[Calculador del inventario de seguridad]", divider="red") 
-    st.write("###### :red[Es importante calcular el volumen del inventario de seguridad, que se refiere a la cantidad necesaria a mantener siempre para evitar escasez, en ciertas materias importnates, como maderas aserradas en la carpintería.]")  
-
-    a = st.number_input("¿Hace 5 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 30)
-    b = st.number_input("¿Hace 4 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 25)
-    c = st.number_input("¿Hace 3 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 45)
-    d = st.number_input("¿Hace 2 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 37)
-    e = st.number_input("¿Ayer (o semana pasada) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 18)
-    g = st.number_input("¿Cuánto días (o semanas) debe esperar la recepción de maderas después de la colocación de la orden?", 0, 300, 5)
+        st.header(" :red[Calculador del inventario de seguridad]", divider="red") 
+        st.write("###### :red[Es importante calcular el volumen del inventario de seguridad, que se refiere a la cantidad necesaria a mantener siempre para evitar escasez, en ciertas materias importnates, como maderas aserradas en la carpintería.]")  
     
+        a = st.number_input("¿Hace 5 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 30)
+        b = st.number_input("¿Hace 4 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 25)
+        c = st.number_input("¿Hace 3 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 45)
+        d = st.number_input("¿Hace 2 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 37)
+        e = st.number_input("¿Ayer (o semana pasada) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 18)
+        g = st.number_input("¿Cuánto días (o semanas) debe esperar la recepción de maderas después de la colocación de la orden?", 0, 300, 5)
+        
+        data = [a, b, c, d, e]
+        SD = np.std(data, ddof=1) 
+        import math
+        Inventario_seguridad1 = 2.33 * SD * math.sqrt(g)
+        Inventario_seguridad5 = 1.64 * SD * math.sqrt(g)   
+        Inventario_seguridad10 = 1.28 * SD * math.sqrt(g)
     
-    data = [a, b, c, d, e]
-    SD = np.std(data, ddof=1) 
-    import math
-    Inventario_seguridad1 = 2.33 * SD * math.sqrt(g)
-    Inventario_seguridad5 = 1.64 * SD * math.sqrt(g)   
-    Inventario_seguridad10 = 1.28 * SD * math.sqrt(g)
-
-    st.write("##### Resultado de cálculo:") 
-    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 1% (piezas)")
-    st.text(round(Inventario_seguridad1))
-    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 5% (piezas)")
-    st.text(round(Inventario_seguridad5))
-    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 10% (piezas)")
-    st.text(round(Inventario_seguridad10))
+        st.write("##### Resultado de cálculo:") 
+        st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 1% (piezas)")
+        st.text(round(Inventario_seguridad1))
+        st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 5% (piezas)")
+        st.text(round(Inventario_seguridad5))
+        st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 10% (piezas)")
+        st.text(round(Inventario_seguridad10))
 
 elif rubro == "Panadería":
     st.title("¿Cómo analizar la operación de Panadería?")
@@ -210,6 +216,7 @@ elif rubro == "Panadería":
         OP6 = st.checkbox("¿La decoración interior y exterior de la tienda transmite una sensación de limpieza e invita a la compra?" )
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
+        st.session_state.show_calculator = True
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4, OP5, OP6])
         
@@ -233,25 +240,27 @@ elif rubro == "Panadería":
             st.write("Aunque la aplicación de redes sociales será importante, la misma aumentará la carga de trabajos.")
         if not OP5:
             st.write("Posibles medidas para aumentar clientes fijos incluyen; (i) Emitir tarjetas de fidelidad para ofrecer descuentos a los clientes que compran con frecuencia, (ii) lanzar nuevos productos cada mes para mantener a los clientes habituales interesados, (iii) ofrecer una taza de café gratis a los clientes que compran pan, etc.")
-        
+    
+    # 計算ツールの表示
+    if st.session_state.show_calculator:        
         # Mensaje final obligatorio
         st.write("En una panadería, cuando hay una gran variedad de productos, tiende a aumentar los costos de venta. Sin embargo, si la variedad de productos es limitada, no será atractivo para los clientes. Es importante aumentar clientes habituales y diseñar una composición de productos adecuada basada en su demanda. Además, al utilizar colores como el marrón y el crema en el diseño interior y exterior de la tienda, se puede estimular el apetito por el pan.")
         st.image("pan.jpg", width = 400)
 
-    st.write("## :blue[Análisis de punto de equilibrio]") 
-    st.write("En un negocio como panadería, es fácil aplicar el análisis de punto de equilibrio, que puede identificar el monto a debe vender. La siguiente calculadora lo facilita.")
-    st.write("###### Se puede calcular la meta de venta, en base al análisis del punto de equilibrio. Mientras que el siguiente ejemplo se refiere a un caso de panadería, esta calculadora se puede aplicar en cualquier negocio.")  
-    a = st.number_input("Precio unitario (¿cuánto cuesta un paquete de panes a vender como promedio?, GTQ)", 1, 100000000000, 15)
-    b = st.number_input("Costo variable unitario (¿cuánto vale el costo de materias primas para un paquete?, GTQ)", 0, 100000000000, 3)
-    c = st.number_input("Costo fijo mensual (alquiler del espacio, depreciación de la maquina, costo de electricidad, etc., GTQ)", 1, 100000000000, 3000)
-    d = st.number_input("Ganancias mensuales que desea (GTQ)", 1, 10000000000, 800)
-    CM = a-b
-    CMR = CM/a
-    st.write("##### Monto de la venta necesaria para alcanzar la ganancia deseada (GTQ)")
-    st.text(round((c+d)/(CMR)))
-    st.write("##### Punto de equilibrio en venta (GTQ)")
-    st.text(round(c/CMR))
-                    
+        st.write("## :blue[Análisis de punto de equilibrio]") 
+        st.write("En un negocio como panadería, es fácil aplicar el análisis de punto de equilibrio, que puede identificar el monto a debe vender. La siguiente calculadora lo facilita.")
+        st.write("###### Se puede calcular la meta de venta, en base al análisis del punto de equilibrio. Mientras que el siguiente ejemplo se refiere a un caso de panadería, esta calculadora se puede aplicar en cualquier negocio.")  
+        a = st.number_input("Precio unitario (¿cuánto cuesta un paquete de panes a vender como promedio?, GTQ)", 1, 100000000000, 15)
+        b = st.number_input("Costo variable unitario (¿cuánto vale el costo de materias primas para un paquete?, GTQ)", 0, 100000000000, 3)
+        c = st.number_input("Costo fijo mensual (alquiler del espacio, depreciación de la maquina, costo de electricidad, etc., GTQ)", 1, 100000000000, 3000)
+        d = st.number_input("Ganancias mensuales que desea (GTQ)", 1, 10000000000, 800)
+        CM = a-b
+        CMR = CM/a
+        st.write("##### Monto de la venta necesaria para alcanzar la ganancia deseada (GTQ)")
+        st.text(round((c+d)/(CMR)))
+        st.write("##### Punto de equilibrio en venta (GTQ)")
+        st.text(round(c/CMR))
+                        
 elif rubro == "Restaurante(Comedor)":
     st.title("¿Como analizar la operación de Restaurante/Comedor?")
 
@@ -278,6 +287,7 @@ elif rubro == "Restaurante(Comedor)":
         OP7 = st.checkbox("¿Intenta incrementar la rotación de clientes?" )
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
+        st.session_state.show_calculator = True
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4, OP5, OP6, OP7])
         
@@ -295,26 +305,28 @@ elif rubro == "Restaurante(Comedor)":
             st.write("Aunque la aplicación de redes sociales será importante, la misma aumentará la carga de trabajos.")
         if not OP1:
             st.write("Si en una misma zona hay restaurantes que se diferencian entre sí, se puede aumentar el volumen de ventas de toda la zona. Por ejemplo, si en una misma zona hay una pizzería, un restaurante de comida peruana y un comedor de carne asado, pueden atraer a diferentes tipos de clientes sin competir directamente entre sí, aumentando así el atractivo general de la zona.")
-        
+
+    # 計算ツールの表示
+    if st.session_state.show_calculator:      
         # Mensaje final obligatorio
         st.write("En un restaurante, una amplia variedad de platos en el menú complica la adquisición de materias primas y la gestión de inventario. Además, si se producen faltantes, la incapacidad de atender los pedidos de los clientes puede generar insatisfacción. Por otro lado, si el menú es demasiado limitado, puede resultar poco atractivo para los clientes. Por lo tanto, es recomendable ofrecer un menú del día para evitar que los clientes se aburran y simplificar las operaciones al poder atender pedidos similares. Las ventas de un restaurante se pueden estimar en función de la cantidad de asientos, por lo que se recomienda utilizar la siguiente calculadora.")
-
-    st.header(" :blue[Herramienta para estimar el monto de venta del comedor]", divider="blue") 
-    st.write("###### :blue[El monto de la venta de un restaurante o cafetería se puede estimar, aplicando esta calculadora. Así, la cooperativa podrá analizar la capacidad de pagos del negocio.]")  
-    a = st.number_input("¿Cuánto asientos tiene el comedor?", 0, 1000, 20)
-    b = st.number_input("Tasa de ocupacion de los asientos por los clientes (%)", 0, 100, 50)
-    c = st.number_input("Veces estimadas de rotación de los clientes al día", 1, 10, 3)
-    d = st.number_input("Promedio estimado de la venta por cliente (GTS)", 1, 1000, 40)
-    e = st.number_input("Días de operación al mes (Días)", 1, 31, 25)
-
-    st.write("###### :red[La tasa de ocupacion puede ser 50%, ya que sólo dos personas pueden ocupar la mesa para cuatro personas. La rotacion de los clientes al día puede ser 4 o 5 veces, como 2 rotaciones a horas de almuerzo y 2 rotaciones a horas de cena.]")
-    E = a*d*(b/100)*c
-
-    st.write("##### Resultado del cálculo: Monto esperado de la venta diaria")
-    st.text(E)
-    st.write("##### Resultado del cálculo: Monto esperado de la venta mensual")
-    st.text(E*e)
-            
+    
+        st.header(" :blue[Herramienta para estimar el monto de venta del comedor]", divider="blue") 
+        st.write("###### :blue[El monto de la venta de un restaurante o cafetería se puede estimar, aplicando esta calculadora. Así, la cooperativa podrá analizar la capacidad de pagos del negocio.]")  
+        a = st.number_input("¿Cuánto asientos tiene el comedor?", 0, 1000, 20)
+        b = st.number_input("Tasa de ocupacion de los asientos por los clientes (%)", 0, 100, 50)
+        c = st.number_input("Veces estimadas de rotación de los clientes al día", 1, 10, 3)
+        d = st.number_input("Promedio estimado de la venta por cliente (GTS)", 1, 1000, 40)
+        e = st.number_input("Días de operación al mes (Días)", 1, 31, 25)
+    
+        st.write("###### :red[La tasa de ocupacion puede ser 50%, ya que sólo dos personas pueden ocupar la mesa para cuatro personas. La rotacion de los clientes al día puede ser 4 o 5 veces, como 2 rotaciones a horas de almuerzo y 2 rotaciones a horas de cena.]")
+        E = a*d*(b/100)*c
+    
+        st.write("##### Resultado del cálculo: Monto esperado de la venta diaria")
+        st.text(E)
+        st.write("##### Resultado del cálculo: Monto esperado de la venta mensual")
+        st.text(E*e)
+                
 elif rubro == "Negocio de impresión":
     st.title("¿Cómo analizar la operación del Negocio de impresión?")
 
