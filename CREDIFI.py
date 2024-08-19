@@ -50,7 +50,7 @@ elif rubro == "Capital de trabajo":
 
         # 計算ツールの表示を制御する部分
         if.st.button("herramienta para analizar"):
-        if st.session_state.show_calculator:        
+    
             # 計算ツールの部分
             st.write("La siguiente calculadora puede identificar el monto total necesario del capital de trabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
             
