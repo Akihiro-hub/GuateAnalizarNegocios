@@ -45,7 +45,7 @@ elif rubro == "Capital de trabajo":
 
     st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
     st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+
 
     st.write("La siguiente calculadora puede identificar el monto total necesario del capital de trabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")        
     st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
@@ -73,7 +73,6 @@ elif rubro == "Capital de inversiones":
     OP5 = st.checkbox("¿El negocio tiene suficiente espacio para instalar el equipo a comprar?")
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
-        st.session_state.show_calculator = True
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4, OP5])
         # Mensaje principal basado en la cantidad de selecciones
@@ -82,9 +81,10 @@ elif rubro == "Capital de inversiones":
             st.balloons()
         else:
             st.write("La inversión puede generar no sólo el aumento de la producción sino tambien el aumento de costos operativos, posiblemente cansando la falta de liquidez del negocio. Por lo cual, es importante analizar si la inversión será oportuna o no, considerando la situación de mercado, o sea, la demanda de cliente, y la competencia con sus competidores.")
-    
-    # 計算ツールの表示
-    if st.session_state.show_calculator:
+        
+        st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+        st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+
         # Mensaje final obligatorio
         st.write("Es importante analizar si el proyecto de la inversión es apropiada o no, aplicando la siguiente calculadora.")
     
@@ -129,7 +129,6 @@ elif rubro == "Carpintería":
         OP5 = st.checkbox("¿El negocio intenta reducir el tiempo desde la compra de materias primas hasta la entrega (venta) de los productos a los clientes, para mejorar su flujo de caja?")
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
-        st.session_state.show_calculator = True
         st.write("## :blue[Sugerencias]")
         
         selected_count = sum([OP1, OP2, OP3, OP4, OP5])
@@ -154,10 +153,9 @@ elif rubro == "Carpintería":
             st.write("El aumento de clientes habituales podrá causar la venta estable y la mejora de la eficiencia operativa.")
         if not OP5:
             st.write("El tiempo largo entre la compra de materias primas hasta la entrega de los productos a los clientes, aumentará la demanda del capital de trabajo.")
-    
-    # 計算ツールの表示
-    if st.session_state.show_calculator:
-        
+   
+        st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+        st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
         # Mensaje final obligatorio
         st.write("Si la empresa se dedica principalmente a la producción prospectiva para el inventario y vende alta variedad de productos, será esencial aumentar (1) la proporción de producción basada de las órdenes de los clientes y (2) los productos con diseños semejantes, reduciendo el coste de las materias primas y aumentando los beneficios, con ventas estables. Es importante que la empresa mantenga el inventario de maderas aserradas de seguridad con el volumen apropiado. Si el negocio tiene el inventario en exceso, tendrá dificultades en su liquidez financiero, además de aumento del riesgo de corrosión de la madera. Por el contrario, si las existencias de materias primas son bajas demasiado, existe el riesgo de perder oportunidades por no poder atender los pedidos de los clientes.")
         st.write("La siguiente calculadora puede identificar el volumen del inventario de seguridad, que determina a la vez la cantidad necesaria del capital de trabajo.")
@@ -212,7 +210,6 @@ elif rubro == "Panadería":
         OP6 = st.checkbox("¿La decoración interior y exterior de la tienda transmite una sensación de limpieza e invita a la compra?" )
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
-        st.session_state.show_calculator = True
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4, OP5, OP6])
         
@@ -237,8 +234,8 @@ elif rubro == "Panadería":
         if not OP5:
             st.write("Posibles medidas para aumentar clientes fijos incluyen; (i) Emitir tarjetas de fidelidad para ofrecer descuentos a los clientes que compran con frecuencia, (ii) lanzar nuevos productos cada mes para mantener a los clientes habituales interesados, (iii) ofrecer una taza de café gratis a los clientes que compran pan, etc.")
     
-    # 計算ツールの表示
-    if st.session_state.show_calculator:        
+        st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+        st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入  
         # Mensaje final obligatorio
         st.write("En una panadería, cuando hay una gran variedad de productos, tiende a aumentar los costos de venta. Sin embargo, si la variedad de productos es limitada, no será atractivo para los clientes. Es importante aumentar clientes habituales y diseñar una composición de productos adecuada basada en su demanda. Además, al utilizar colores como el marrón y el crema en el diseño interior y exterior de la tienda, se puede estimular el apetito por el pan.")
         st.image("pan.jpg", width = 400)
@@ -283,7 +280,6 @@ elif rubro == "Restaurante(Comedor)":
         OP7 = st.checkbox("¿Intenta incrementar la rotación de clientes?" )
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
-        st.session_state.show_calculator = True
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4, OP5, OP6, OP7])
         
@@ -302,8 +298,8 @@ elif rubro == "Restaurante(Comedor)":
         if not OP1:
             st.write("Si en una misma zona hay restaurantes que se diferencian entre sí, se puede aumentar el volumen de ventas de toda la zona. Por ejemplo, si en una misma zona hay una pizzería, un restaurante de comida peruana y un comedor de carne asado, pueden atraer a diferentes tipos de clientes sin competir directamente entre sí, aumentando así el atractivo general de la zona.")
 
-    # 計算ツールの表示
-    if st.session_state.show_calculator:      
+        st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+        st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
         # Mensaje final obligatorio
         st.write("En un restaurante, una amplia variedad de platos en el menú complica la adquisición de materias primas y la gestión de inventario. Además, si se producen faltantes, la incapacidad de atender los pedidos de los clientes puede generar insatisfacción. Por otro lado, si el menú es demasiado limitado, puede resultar poco atractivo para los clientes. Por lo tanto, es recomendable ofrecer un menú del día para evitar que los clientes se aburran y simplificar las operaciones al poder atender pedidos similares. Las ventas de un restaurante se pueden estimar en función de la cantidad de asientos, por lo que se recomienda utilizar la siguiente calculadora.")
     
