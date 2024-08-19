@@ -48,20 +48,20 @@ elif rubro == "Capital de trabajo":
         else:
             st.write("La demanda del capital de trabajo se aumentará por (i) la ineficiencia operativa, y (ii) condiciones inapropiadas de compras y ventas. Si la ineficiencia operativa genera la demanda adicional del capital, es importante asesorar el negocio con miras a su mejora.")
 
-    # 計算ツールの表示
-    if st.session_state.show_calculator:
-        # Mensaje final obligatorio
-        st.write("La siguiente calculadora puede identificar el monto total necesario del capital de ytabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
-    
-        st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
-        st.write("###### :blue[Calculadora del monto total necesario del capital de trabajo normal del negocio]")  
-        e = st.number_input("Valor del inventario (GTQ)", 1, 10000000000000, 8000)
-        f = st.number_input("Cuentas por pagar (GTQ)", 1, 10000000000000, 2000)
-        g = st.number_input("Cuentas por cobrar (GTQ)", 1, 1000000000000, 4000)
-        h = e + g - f
-    
-        st.write("##### Resultado del cálculo: Monto total necesario del capital de trabajo normal (GTQ):")
-        st.text(h)
+        # 計算ツールの表示
+        if st.session_state.show_calculator:
+            # Mensaje final obligatorio
+            st.write("La siguiente calculadora puede identificar el monto total necesario del capital de ytabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
+        
+            st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
+            st.write("###### :blue[Calculadora del monto total necesario del capital de trabajo normal del negocio]")  
+            e = st.number_input("Valor del inventario (GTQ)", 1, 10000000000000, 8000)
+            f = st.number_input("Cuentas por pagar (GTQ)", 1, 10000000000000, 2000)
+            g = st.number_input("Cuentas por cobrar (GTQ)", 1, 1000000000000, 4000)
+            h = e + g - f
+        
+            st.write("##### Resultado del cálculo: Monto total necesario del capital de trabajo normal (GTQ):")
+            st.text(h)
 
 elif rubro == "Capital de inversiones":
     st.write("#### :green[¿Qué tenemos que analizar la solicitud del crédito para el capital de inversión?]") 
