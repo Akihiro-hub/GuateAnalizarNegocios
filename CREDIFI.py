@@ -8,7 +8,6 @@ def main():
     while True:
         time.sleep(360 * 360)  # Sleep for 6 hours
 
-
 rubro = st.sidebar.selectbox("Rubro de negocio (o tema) a analizar", ["Seleccione", "Carpintería", "Panadería", "Restaurante(Comedor)", "Negocio de impresión", "Construcción", "Corte y confección", "Mercadito(Pulpería)", "Reparación del auto", "Capital de trabajo", "Capital de inversiones", "Análisis de estados financieros"])
 
 if rubro == "Seleccione":
@@ -26,6 +25,7 @@ elif rubro == "Capital de trabajo":
     st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Abajo se presentan los puntos a analizar la solicitud para el capital de trabajo.") 
     st.write("###### El capital de trabajo se necesita para mantener la operación diaria del negocio. Algunas veces, la cantidad necesaria del capital de trabajo se puede aumentar, por (i) la expansión del negocio, (ii) el inventario sobrante, (iii) los costos operativos elevados, (iv) el motivo temporal, etc.") 
 
+
     st.write("#### :red[Lista de chequeo]", divider="red") 
     st.write("###### :red[Con relación a la solicitud del crédito para el capital de trabajo, deberá averiguar los siguientes.]")
     OP1 = st.checkbox("¿El negocio no tiene el inventario sobrante? ¿No tiene saldos de productos que estén fuera de temporada o de moda, que sean difíciles de vender? (Si hay un aumento alto en la cantidad de inventario de productos, ¿tiene una causa razonable?)")
@@ -36,29 +36,26 @@ elif rubro == "Capital de trabajo":
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4])
-        # メインメッセージを選択数に基づいて表示
+        # Mensaje principal basado en la cantidad de selecciones
         if selected_count == 4:
             st.write("Probablemente se ha observado bien.")
             st.balloons()
         else:
             st.write("La demanda del capital de trabajo se aumentará por (i) la ineficiencia operativa, y (ii) condiciones inapropiadas de compras y ventas. Si la ineficiencia operativa genera la demanda adicional del capital, es importante asesorar el negocio con miras a su mejora.")
 
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+    # Mensaje final obligatorio
+    st.write("La siguiente calculadora puede identificar el monto total necesario del capital de ytabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
 
-
-    st.write("La siguiente calculadora puede identificar el monto total necesario del capital de trabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")        
     st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
     st.write("###### :blue[Calculadora del monto total necesario del capital de trabajo normal del negocio]")  
     e = st.number_input("Valor del inventario (GTQ)", 1, 10000000000000, 8000)
     f = st.number_input("Cuentas por pagar (GTQ)", 1, 10000000000000, 2000)
     g = st.number_input("Cuentas por cobrar (GTQ)", 1, 1000000000000, 4000)
     h = e + g - f
-            
+
     st.write("##### Resultado del cálculo: Monto total necesario del capital de trabajo normal (GTQ):")
     st.text(h)
 
-        
 elif rubro == "Capital de inversiones":
     st.write("#### :green[¿Qué tenemos que analizar la solicitud del crédito para el capital de inversión?]") 
     st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Abajo se presentan los puntos a analizar la solicitud para el capital de inversión.") 
@@ -81,30 +78,27 @@ elif rubro == "Capital de inversiones":
             st.balloons()
         else:
             st.write("La inversión puede generar no sólo el aumento de la producción sino tambien el aumento de costos operativos, posiblemente cansando la falta de liquidez del negocio. Por lo cual, es importante analizar si la inversión será oportuna o no, considerando la situación de mercado, o sea, la demanda de cliente, y la competencia con sus competidores.")
-        
-        st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-        st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
 
-        # Mensaje final obligatorio
-        st.write("Es importante analizar si el proyecto de la inversión es apropiada o no, aplicando la siguiente calculadora.")
-    
-        st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
-        st.write("###### :blue[Calculadora del valor presente neto del proyecto]")  
-        a = st.number_input("¿Cuánto se debe invertir al inicio del proyecto (GTQ)?", 0, 10000000000000, 50000)
-        b = st.number_input("¿Cuál es tasa de costo del capital del negocio (%)?", 0, 100, 12)
-        c = st.number_input("¿Cuánto podrá ganar al año por el proyecto de inversión? (De manera más precisa tiene que decirse como el flujo anual de caja, que es casi igual a ganancias menos depreciación: GTQ)", 1, 1000000000000, 20000)
-        d = st.number_input("Duración del proyecto (años)", 1, 100, 4)
-    
-    
-        lst = [c for i in range(d)]
-        lst0 = [-1 * a]
-        lst = lst0 + lst
-        npv = sum(lst / (1 + b/100) ** t for t, lst in enumerate(lst)) 
-        rate = b/100
-            
-        st.write("#### Valor Presente Neto (VPN) de la inversión (GTQ):")
-        st.text(f"VPN: {round(npv)}")
-        st.write("###### :blue[La inversion con VPN negativo o insuficiente deberá rechazarse.]")
+    # Mensaje final obligatorio
+    st.write("Es importante analizar si el proyecto de la inversión es apropiada o no, aplicando la siguiente calculadora.")
+
+    st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
+    st.write("###### :blue[Calculadora del valor presente neto del proyecto]")  
+    a = st.number_input("¿Cuánto se debe invertir al inicio del proyecto (GTQ)?", 0, 10000000000000, 50000)
+    b = st.number_input("¿Cuál es tasa de costo del capital del negocio (%)?", 0, 100, 12)
+    c = st.number_input("¿Cuánto podrá ganar al año por el proyecto de inversión? (De manera más precisa tiene que decirse como el flujo anual de caja, que es casi igual a ganancias menos depreciación: GTQ)", 1, 1000000000000, 20000)
+    d = st.number_input("Duración del proyecto (años)", 1, 100, 4)
+
+
+    lst = [c for i in range(d)]
+    lst0 = [-1 * a]
+    lst = lst0 + lst
+    npv = sum(lst / (1 + b/100) ** t for t, lst in enumerate(lst)) 
+    rate = b/100
+        
+    st.write("#### Valor Presente Neto (VPN) de la inversión (GTQ):")
+    st.text(f"VPN: {round(npv)}")
+    st.write("###### :blue[La inversion con VPN negativo o insuficiente deberá rechazarse.]")
 
 elif rubro == "Carpintería":
     st.title("¿Cómo analizar la operación de Carpintería?")
@@ -153,13 +147,11 @@ elif rubro == "Carpintería":
             st.write("El aumento de clientes habituales podrá causar la venta estable y la mejora de la eficiencia operativa.")
         if not OP5:
             st.write("El tiempo largo entre la compra de materias primas hasta la entrega de los productos a los clientes, aumentará la demanda del capital de trabajo.")
-   
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    # Mensaje final obligatorio
-    st.write("Si la empresa se dedica principalmente a la producción prospectiva para el inventario y vende alta variedad de productos, será esencial aumentar (1) la proporción de producción basada de las órdenes de los clientes y (2) los productos con diseños semejantes, reduciendo el coste de las materias primas y aumentando los beneficios, con ventas estables. Es importante que la empresa mantenga el inventario de maderas aserradas de seguridad con el volumen apropiado. Si el negocio tiene el inventario en exceso, tendrá dificultades en su liquidez financiero, además de aumento del riesgo de corrosión de la madera. Por el contrario, si las existencias de materias primas son bajas demasiado, existe el riesgo de perder oportunidades por no poder atender los pedidos de los clientes.")
-    st.write("La siguiente calculadora puede identificar el volumen del inventario de seguridad, que determina a la vez la cantidad necesaria del capital de trabajo.")
         
+        # Mensaje final obligatorio
+        st.write("Si la empresa se dedica principalmente a la producción prospectiva para el inventario y vende alta variedad de productos, será esencial aumentar (1) la proporción de producción basada de las órdenes de los clientes y (2) los productos con diseños semejantes, reduciendo el coste de las materias primas y aumentando los beneficios, con ventas estables. Es importante que la empresa mantenga el inventario de maderas aserradas de seguridad con el volumen apropiado. Si el negocio tiene el inventario en exceso, tendrá dificultades en su liquidez financiero, además de aumento del riesgo de corrosión de la madera. Por el contrario, si las existencias de materias primas son bajas demasiado, existe el riesgo de perder oportunidades por no poder atender los pedidos de los clientes.")
+        st.write("La siguiente calculadora puede identificar el volumen del inventario de seguridad, que determina a la vez la cantidad necesaria del capital de trabajo.")
+            
     st.header(" :red[Calculador del inventario de seguridad]", divider="red") 
     st.write("###### :red[Es importante calcular el volumen del inventario de seguridad, que se refiere a la cantidad necesaria a mantener siempre para evitar escasez, en ciertas materias importnates, como maderas aserradas en la carpintería.]")  
 
@@ -169,6 +161,7 @@ elif rubro == "Carpintería":
     d = st.number_input("¿Hace 2 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 37)
     e = st.number_input("¿Ayer (o semana pasada) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 18)
     g = st.number_input("¿Cuánto días (o semanas) debe esperar la recepción de maderas después de la colocación de la orden?", 0, 300, 5)
+    
     
     data = [a, b, c, d, e]
     SD = np.std(data, ddof=1) 
@@ -233,12 +226,10 @@ elif rubro == "Panadería":
             st.write("Aunque la aplicación de redes sociales será importante, la misma aumentará la carga de trabajos.")
         if not OP5:
             st.write("Posibles medidas para aumentar clientes fijos incluyen; (i) Emitir tarjetas de fidelidad para ofrecer descuentos a los clientes que compran con frecuencia, (ii) lanzar nuevos productos cada mes para mantener a los clientes habituales interesados, (iii) ofrecer una taza de café gratis a los clientes que compran pan, etc.")
-    
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入  
-    # Mensaje final obligatorio
-    st.write("En una panadería, cuando hay una gran variedad de productos, tiende a aumentar los costos de venta. Sin embargo, si la variedad de productos es limitada, no será atractivo para los clientes. Es importante aumentar clientes habituales y diseñar una composición de productos adecuada basada en su demanda. Además, al utilizar colores como el marrón y el crema en el diseño interior y exterior de la tienda, se puede estimular el apetito por el pan.")
-    st.image("pan.jpg", width = 400)
+        
+        # Mensaje final obligatorio
+        st.write("En una panadería, cuando hay una gran variedad de productos, tiende a aumentar los costos de venta. Sin embargo, si la variedad de productos es limitada, no será atractivo para los clientes. Es importante aumentar clientes habituales y diseñar una composición de productos adecuada basada en su demanda. Además, al utilizar colores como el marrón y el crema en el diseño interior y exterior de la tienda, se puede estimular el apetito por el pan.")
+        st.image("pan.jpg", width = 400)
 
     st.write("## :blue[Análisis de punto de equilibrio]") 
     st.write("En un negocio como panadería, es fácil aplicar el análisis de punto de equilibrio, que puede identificar el monto a debe vender. La siguiente calculadora lo facilita.")
@@ -253,7 +244,7 @@ elif rubro == "Panadería":
     st.text(round((c+d)/(CMR)))
     st.write("##### Punto de equilibrio en venta (GTQ)")
     st.text(round(c/CMR))
-                        
+                    
 elif rubro == "Restaurante(Comedor)":
     st.title("¿Como analizar la operación de Restaurante/Comedor?")
 
@@ -297,11 +288,9 @@ elif rubro == "Restaurante(Comedor)":
             st.write("Aunque la aplicación de redes sociales será importante, la misma aumentará la carga de trabajos.")
         if not OP1:
             st.write("Si en una misma zona hay restaurantes que se diferencian entre sí, se puede aumentar el volumen de ventas de toda la zona. Por ejemplo, si en una misma zona hay una pizzería, un restaurante de comida peruana y un comedor de carne asado, pueden atraer a diferentes tipos de clientes sin competir directamente entre sí, aumentando así el atractivo general de la zona.")
-
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    # Mensaje final obligatorio
-    st.write("En un restaurante, una amplia variedad de platos en el menú complica la adquisición de materias primas y la gestión de inventario. Además, si se producen faltantes, la incapacidad de atender los pedidos de los clientes puede generar insatisfacción. Por otro lado, si el menú es demasiado limitado, puede resultar poco atractivo para los clientes. Por lo tanto, es recomendable ofrecer un menú del día para evitar que los clientes se aburran y simplificar las operaciones al poder atender pedidos similares. Las ventas de un restaurante se pueden estimar en función de la cantidad de asientos, por lo que se recomienda utilizar la siguiente calculadora.")
+        
+        # Mensaje final obligatorio
+        st.write("En un restaurante, una amplia variedad de platos en el menú complica la adquisición de materias primas y la gestión de inventario. Además, si se producen faltantes, la incapacidad de atender los pedidos de los clientes puede generar insatisfacción. Por otro lado, si el menú es demasiado limitado, puede resultar poco atractivo para los clientes. Por lo tanto, es recomendable ofrecer un menú del día para evitar que los clientes se aburran y simplificar las operaciones al poder atender pedidos similares. Las ventas de un restaurante se pueden estimar en función de la cantidad de asientos, por lo que se recomienda utilizar la siguiente calculadora.")
 
     st.header(" :blue[Herramienta para estimar el monto de venta del comedor]", divider="blue") 
     st.write("###### :blue[El monto de la venta de un restaurante o cafetería se puede estimar, aplicando esta calculadora. Así, la cooperativa podrá analizar la capacidad de pagos del negocio.]")  
