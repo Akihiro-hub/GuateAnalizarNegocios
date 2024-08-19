@@ -44,7 +44,9 @@ elif rubro == "Capital de trabajo":
             st.write("La demanda del capital de trabajo se aumentará por (i) la ineficiencia operativa, y (ii) condiciones inapropiadas de compras y ventas. Si la ineficiencia operativa genera la demanda adicional del capital, es importante asesorar el negocio con miras a su mejora.")
 
     # Mensaje final obligatorio
-    st.write("La siguiente calculadora puede identificar el monto total necesario del capital de ytabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
+    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+    st.write("La siguiente calculadora puede identificar el monto total necesario del capital de trabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
 
     st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
     st.write("###### :blue[Calculadora del monto total necesario del capital de trabajo normal del negocio]")  
@@ -80,6 +82,8 @@ elif rubro == "Capital de inversiones":
             st.write("La inversión puede generar no sólo el aumento de la producción sino tambien el aumento de costos operativos, posiblemente cansando la falta de liquidez del negocio. Por lo cual, es importante analizar si la inversión será oportuna o no, considerando la situación de mercado, o sea, la demanda de cliente, y la competencia con sus competidores.")
 
     # Mensaje final obligatorio
+    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
     st.write("Es importante analizar si el proyecto de la inversión es apropiada o no, aplicando la siguiente calculadora.")
 
     st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
@@ -150,7 +154,10 @@ elif rubro == "Carpintería":
         
         # Mensaje final obligatorio
         st.write("Si la empresa se dedica principalmente a la producción prospectiva para el inventario y vende alta variedad de productos, será esencial aumentar (1) la proporción de producción basada de las órdenes de los clientes y (2) los productos con diseños semejantes, reduciendo el coste de las materias primas y aumentando los beneficios, con ventas estables. Es importante que la empresa mantenga el inventario de maderas aserradas de seguridad con el volumen apropiado. Si el negocio tiene el inventario en exceso, tendrá dificultades en su liquidez financiero, además de aumento del riesgo de corrosión de la madera. Por el contrario, si las existencias de materias primas son bajas demasiado, existe el riesgo de perder oportunidades por no poder atender los pedidos de los clientes.")
-        st.write("La siguiente calculadora puede identificar el volumen del inventario de seguridad, que determina a la vez la cantidad necesaria del capital de trabajo.")
+    
+    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+    st.write("La siguiente calculadora puede identificar el volumen del inventario de seguridad, que determina a la vez la cantidad necesaria del capital de trabajo.")
             
     st.header(" :red[Calculador del inventario de seguridad]", divider="red") 
     st.write("###### :red[Es importante calcular el volumen del inventario de seguridad, que se refiere a la cantidad necesaria a mantener siempre para evitar escasez, en ciertas materias importnates, como maderas aserradas en la carpintería.]")  
@@ -231,6 +238,8 @@ elif rubro == "Panadería":
         st.write("En una panadería, cuando hay una gran variedad de productos, tiende a aumentar los costos de venta. Sin embargo, si la variedad de productos es limitada, no será atractivo para los clientes. Es importante aumentar clientes habituales y diseñar una composición de productos adecuada basada en su demanda. Además, al utilizar colores como el marrón y el crema en el diseño interior y exterior de la tienda, se puede estimular el apetito por el pan.")
         st.image("pan.jpg", width = 400)
 
+    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
     st.write("## :blue[Análisis de punto de equilibrio]") 
     st.write("En un negocio como panadería, es fácil aplicar el análisis de punto de equilibrio, que puede identificar el monto a debe vender. La siguiente calculadora lo facilita.")
     st.write("###### Se puede calcular la meta de venta, en base al análisis del punto de equilibrio. Mientras que el siguiente ejemplo se refiere a un caso de panadería, esta calculadora se puede aplicar en cualquier negocio.")  
@@ -292,6 +301,9 @@ elif rubro == "Restaurante(Comedor)":
         # Mensaje final obligatorio
         st.write("En un restaurante, una amplia variedad de platos en el menú complica la adquisición de materias primas y la gestión de inventario. Además, si se producen faltantes, la incapacidad de atender los pedidos de los clientes puede generar insatisfacción. Por otro lado, si el menú es demasiado limitado, puede resultar poco atractivo para los clientes. Por lo tanto, es recomendable ofrecer un menú del día para evitar que los clientes se aburran y simplificar las operaciones al poder atender pedidos similares. Las ventas de un restaurante se pueden estimar en función de la cantidad de asientos, por lo que se recomienda utilizar la siguiente calculadora.")
 
+    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
+    
     st.header(" :blue[Herramienta para estimar el monto de venta del comedor]", divider="blue") 
     st.write("###### :blue[El monto de la venta de un restaurante o cafetería se puede estimar, aplicando esta calculadora. Así, la cooperativa podrá analizar la capacidad de pagos del negocio.]")  
     a = st.number_input("¿Cuánto asientos tiene el comedor?", 0, 1000, 20)
