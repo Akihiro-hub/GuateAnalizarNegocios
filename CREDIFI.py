@@ -2,6 +2,15 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import math
+
+# セッション状態を初期化
+if 'page' not in st.session_state:
+    st.session_state['page'] = 'checklist'
+
+# ページのナビゲーションを制御
+def switch_to_analysis():
+    st.session_state['page'] = 'analysis'
 
 import time
 def main():
@@ -34,14 +43,17 @@ elif rubro == "Capital de trabajo":
     OP4 = st.checkbox("¿El aumento de la necesidad del capital de trabajo se genera por la ineficiencia operativa, tales como la reducción drástica de la venta, aumento considerable del costos operativos, etc.? (En caso afirmativo, ¿la empresa aplica ciertas medidas para solucionarla?)")
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
-        st.write("## :blue[Sugerencias]")
-        selected_count = sum([OP1, OP2, OP3, OP4])
-        # Mensaje principal basado en la cantidad de selecciones
-        if selected_count == 4:
-            st.write("Probablemente se ha observado bien.")
-            st.balloons()
-        else:
-            st.write("La demanda del capital de trabajo se aumentará por (i) la ineficiencia operativa, y (ii) condiciones inapropiadas de compras y ventas. Si la ineficiencia operativa genera la demanda adicional del capital, es importante asesorar el negocio con miras a su mejora.")
+        switch_to_analysis()  # 分析ページに切り替える
+
+if st.session_state['page'] == 'analysis':
+    st.write("## :blue[Sugerencias]")
+    selected_count = sum([OP1, OP2, OP3, OP4])
+    # Mensaje principal basado en la cantidad de selecciones
+    if selected_count == 4:
+        st.write("Probablemente se ha observado bien.")
+        st.balloons()
+    else:
+        st.write("La demanda del capital de trabajo se aumentará por (i) la ineficiencia operativa, y (ii) condiciones inapropiadas de compras y ventas. Si la ineficiencia operativa genera la demanda adicional del capital, es importante asesorar el negocio con miras a su mejora.")
 
     # Mensaje final obligatorio
     st.write("La siguiente calculadora puede identificar el monto total necesario del capital de ytabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
@@ -70,6 +82,10 @@ elif rubro == "Capital de inversiones":
     OP5 = st.checkbox("¿El negocio tiene suficiente espacio para instalar el equipo a comprar?")
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
+        switch_to_analysis()  # 分析ページに切り替える
+
+if st.session_state['page'] == 'analysis':
+
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4, OP5])
         # Mensaje principal basado en la cantidad de selecciones
@@ -123,6 +139,10 @@ elif rubro == "Carpintería":
         OP5 = st.checkbox("¿El negocio intenta reducir el tiempo desde la compra de materias primas hasta la entrega (venta) de los productos a los clientes, para mejorar su flujo de caja?")
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
+        switch_to_analysis()  # 分析ページに切り替える
+
+if st.session_state['page'] == 'analysis':
+
         st.write("## :blue[Sugerencias]")
         
         selected_count = sum([OP1, OP2, OP3, OP4, OP5])
@@ -203,6 +223,9 @@ elif rubro == "Panadería":
         OP6 = st.checkbox("¿La decoración interior y exterior de la tienda transmite una sensación de limpieza e invita a la compra?" )
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
+        switch_to_analysis()  # 分析ページに切り替える
+
+if st.session_state['page'] == 'analysis':
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4, OP5, OP6])
         
@@ -271,6 +294,9 @@ elif rubro == "Restaurante(Comedor)":
         OP7 = st.checkbox("¿Intenta incrementar la rotación de clientes?" )
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
+        switch_to_analysis()  # 分析ページに切り替える
+
+if st.session_state['page'] == 'analysis':
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4, OP5, OP6, OP7])
         
@@ -307,6 +333,7 @@ elif rubro == "Restaurante(Comedor)":
     st.text(E)
     st.write("##### Resultado del cálculo: Monto esperado de la venta mensual")
     st.text(E*e)
+
             
 elif rubro == "Negocio de impresión":
     st.title("¿Cómo analizar la operación del Negocio de impresión?")
@@ -658,6 +685,4 @@ elif rubro == "Análisis de estados financieros":
 
             # Display in Streamlit
             st.pyplot(fig)
-
-
 
