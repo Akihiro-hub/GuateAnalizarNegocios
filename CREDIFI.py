@@ -89,10 +89,10 @@ if st.session_state['page'] == 'analysis':
     selected_count = sum([OP1, OP2, OP3, OP4, OP5])
     # Mensaje principal basado en la cantidad de selecciones
     if selected_count == 5:
-    　　st.write("Probablemente se ha observado bien.")
-    　　st.balloons()
+        st.write("Probablemente se ha observado bien.")
+        st.balloons()
     else:
-    　　st.write("La inversión puede generar no sólo el aumento de la producción sino tambien el aumento de costos operativos, posiblemente cansando la falta de liquidez del negocio. Por lo cual, es importante analizar si la inversión será oportuna o no, considerando la situación de mercado, o sea, la demanda de cliente, y la competencia con sus competidores.")
+        st.write("La inversión puede generar no sólo el aumento de la producción sino tambien el aumento de costos operativos, posiblemente cansando la falta de liquidez del negocio. Por lo cual, es importante analizar si la inversión será oportuna o no, considerando la situación de mercado, o sea, la demanda de cliente, y la competencia con sus competidores.")
 
     # Mensaje final obligatorio
     st.write("Es importante analizar si el proyecto de la inversión es apropiada o no, aplicando la siguiente calculadora.")
