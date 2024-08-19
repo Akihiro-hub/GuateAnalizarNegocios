@@ -25,7 +25,7 @@ if rubro == "Seleccione":
 
 elif rubro == "Capital de trabajo":
     st.write("#### :green[¿Qué tenemos que analizar la solicitud del crédito para el capital de trabajo?]") 
-    st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Abajo se presentan los puntos a analizar la solicitud para el capital de trabajo.") 
+    st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Abajo se presentan los puntos a analizar la solicitud para el capital de trabajo。") 
     st.write("###### El capital de trabajo se necesita para mantener la operación diaria del negocio. Algunas veces, la cantidad necesaria del capital de trabajo se puede aumentar, por (i) la expansión del negocio, (ii) el inventario sobrante, (iii) los costos operativos elevados, (iv) el motivo temporal, etc.") 
 
 
@@ -36,32 +36,33 @@ elif rubro == "Capital de trabajo":
     OP3 = st.checkbox("¿El valor de las cuentas por cobrar no es alto en este tiempo? ¿Esta situación responde porque no ha habido un aumento drástico en operaciones recientes?")
     OP4 = st.checkbox("¿El aumento de la necesidad del capital de trabajo se genera por la ineficiencia operativa, tales como la reducción drástica de la venta, aumento considerable del costos operativos, etc.? (En caso afirmativo, ¿la empresa aplica ciertas medidas para solucionarla?)")
 
+    # ボタンを押すことで計算ツールの表示をトリガーする
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
         st.session_state.show_calculator = True
-        
+
+    # 計算ツールの表示を制御する部分
+    if st.session_state.show_calculator:
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4])
-        # Mensaje principal basado en la cantidad de selecciones
+        # メインメッセージを選択数に基づいて表示
         if selected_count == 4:
             st.write("Probablemente se ha observado bien.")
             st.balloons()
         else:
             st.write("La demanda del capital de trabajo se aumentará por (i) la ineficiencia operativa, y (ii) condiciones inapropiadas de compras y ventas. Si la ineficiencia operativa genera la demanda adicional del capital, es importante asesorar el negocio con miras a su mejora.")
 
-        # 計算ツールの表示
-        if st.session_state.show_calculator:
-            # Mensaje final obligatorio
-            st.write("La siguiente calculadora puede identificar el monto total necesario del capital de ytabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
-        
-            st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
-            st.write("###### :blue[Calculadora del monto total necesario del capital de trabajo normal del negocio]")  
-            e = st.number_input("Valor del inventario (GTQ)", 1, 10000000000000, 8000)
-            f = st.number_input("Cuentas por pagar (GTQ)", 1, 10000000000000, 2000)
-            g = st.number_input("Cuentas por cobrar (GTQ)", 1, 1000000000000, 4000)
-            h = e + g - f
-        
-            st.write("##### Resultado del cálculo: Monto total necesario del capital de trabajo normal (GTQ):")
-            st.text(h)
+        # 計算ツールの部分
+        st.write("La siguiente calculadora puede identificar el monto total necesario del capital de trabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
+    
+        st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
+        st.write("###### :blue[Calculadora del monto total necesario del capital de trabajo normal del negocio]")  
+        e = st.number_input("Valor del inventario (GTQ)", 1, 10000000000000, 8000)
+        f = st.number_input("Cuentas por pagar (GTQ)", 1, 10000000000000, 2000)
+        g = st.number_input("Cuentas por cobrar (GTQ)", 1, 1000000000000, 4000)
+        h = e + g - f
+    
+        st.write("##### Resultado del cálculo: Monto total necesario del capital de trabajo normal (GTQ):")
+        st.text(h)
 
 elif rubro == "Capital de inversiones":
     st.write("#### :green[¿Qué tenemos que analizar la solicitud del crédito para el capital de inversión?]") 
