@@ -49,7 +49,7 @@ elif rubro == "Capital de trabajo":
             st.write("La demanda del capital de trabajo se aumentará por (i) la ineficiencia operativa, y (ii) condiciones inapropiadas de compras y ventas. Si la ineficiencia operativa genera la demanda adicional del capital, es importante asesorar el negocio con miras a su mejora.")
 
         # 計算ツールの表示を制御する部分
-        if.st.button("herramienta para analizar"):
+        if st.button("herramienta para analizar"):
     
             # 計算ツールの部分
             st.write("La siguiente calculadora puede identificar el monto total necesario del capital de trabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
