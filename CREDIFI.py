@@ -8,6 +8,9 @@ def main():
     while True:
         time.sleep(360 * 360)  # Sleep for 6 hours
 
+if "show_calculator" not in st.session_state:
+    st.session_state.show_calculator = False
+
 rubro = st.sidebar.selectbox("Rubro de negocio (o tema) a analizar", ["Seleccione", "Carpintería", "Panadería", "Restaurante(Comedor)", "Negocio de impresión", "Construcción", "Corte y confección", "Mercadito(Pulpería)", "Reparación del auto", "Capital de trabajo", "Capital de inversiones", "Análisis de estados financieros"])
 
 if rubro == "Seleccione":
@@ -34,6 +37,8 @@ elif rubro == "Capital de trabajo":
     OP4 = st.checkbox("¿El aumento de la necesidad del capital de trabajo se genera por la ineficiencia operativa, tales como la reducción drástica de la venta, aumento considerable del costos operativos, etc.? (En caso afirmativo, ¿la empresa aplica ciertas medidas para solucionarla?)")
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
+        st.session_state.show_calculator = True
+        
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4])
         # Mensaje principal basado en la cantidad de selecciones
@@ -43,18 +48,20 @@ elif rubro == "Capital de trabajo":
         else:
             st.write("La demanda del capital de trabajo se aumentará por (i) la ineficiencia operativa, y (ii) condiciones inapropiadas de compras y ventas. Si la ineficiencia operativa genera la demanda adicional del capital, es importante asesorar el negocio con miras a su mejora.")
 
-    # Mensaje final obligatorio
-    st.write("La siguiente calculadora puede identificar el monto total necesario del capital de ytabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
-
-    st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
-    st.write("###### :blue[Calculadora del monto total necesario del capital de trabajo normal del negocio]")  
-    e = st.number_input("Valor del inventario (GTQ)", 1, 10000000000000, 8000)
-    f = st.number_input("Cuentas por pagar (GTQ)", 1, 10000000000000, 2000)
-    g = st.number_input("Cuentas por cobrar (GTQ)", 1, 1000000000000, 4000)
-    h = e + g - f
-
-    st.write("##### Resultado del cálculo: Monto total necesario del capital de trabajo normal (GTQ):")
-    st.text(h)
+    # 計算ツールの表示
+    if st.session_state.show_calculator:
+        # Mensaje final obligatorio
+        st.write("La siguiente calculadora puede identificar el monto total necesario del capital de ytabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
+    
+        st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
+        st.write("###### :blue[Calculadora del monto total necesario del capital de trabajo normal del negocio]")  
+        e = st.number_input("Valor del inventario (GTQ)", 1, 10000000000000, 8000)
+        f = st.number_input("Cuentas por pagar (GTQ)", 1, 10000000000000, 2000)
+        g = st.number_input("Cuentas por cobrar (GTQ)", 1, 1000000000000, 4000)
+        h = e + g - f
+    
+        st.write("##### Resultado del cálculo: Monto total necesario del capital de trabajo normal (GTQ):")
+        st.text(h)
 
 elif rubro == "Capital de inversiones":
     st.write("#### :green[¿Qué tenemos que analizar la solicitud del crédito para el capital de inversión?]") 
