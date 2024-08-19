@@ -182,20 +182,20 @@ if st.session_state['page'] == 'analysis':
         g = st.number_input("¿Cuánto días (o semanas) debe esperar la recepción de maderas después de la colocación de la orden?", 0, 300, 5)
         
         
-    data = [a, b, c, d, e]
-    SD = np.std(data, ddof=1) 
-    import math
-    Inventario_seguridad1 = 2.33 * SD * math.sqrt(g)
-    Inventario_seguridad5 = 1.64 * SD * math.sqrt(g)   
-    Inventario_seguridad10 = 1.28 * SD * math.sqrt(g)
-
-    st.write("##### Resultado de cálculo:") 
-    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 1% (piezas)")
-    st.text(round(Inventario_seguridad1))
-    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 5% (piezas)")
-    st.text(round(Inventario_seguridad5))
-    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 10% (piezas)")
-    st.text(round(Inventario_seguridad10))
+        data = [a, b, c, d, e]
+        SD = np.std(data, ddof=1) 
+        import math
+        Inventario_seguridad1 = 2.33 * SD * math.sqrt(g)
+        Inventario_seguridad5 = 1.64 * SD * math.sqrt(g)   
+        Inventario_seguridad10 = 1.28 * SD * math.sqrt(g)
+    
+        st.write("##### Resultado de cálculo:") 
+        st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 1% (piezas)")
+        st.text(round(Inventario_seguridad1))
+        st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 5% (piezas)")
+        st.text(round(Inventario_seguridad5))
+        st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 10% (piezas)")
+        st.text(round(Inventario_seguridad10))
 
 elif rubro == "Panadería":
     st.title("¿Cómo analizar la operación de Panadería?")
