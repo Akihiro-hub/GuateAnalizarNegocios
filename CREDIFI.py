@@ -3,6 +3,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# テーマをライトテーマに設定
+st.set_page_config(layout="centered", theme={"base": "light"})
+
 import time
 def main():
     while True:
