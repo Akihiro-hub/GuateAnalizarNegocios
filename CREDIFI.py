@@ -156,37 +156,7 @@ elif rubro == "Carpintería":
         
         # Mensaje final obligatorio
         st.write("Si la empresa se dedica principalmente a la producción prospectiva para el inventario y vende alta variedad de productos, será esencial aumentar (1) la proporción de producción basada de las órdenes de los clientes y (2) los productos con diseños semejantes, reduciendo el coste de las materias primas y aumentando los beneficios, con ventas estables. Es importante que la empresa mantenga el inventario de maderas aserradas de seguridad con el volumen apropiado. Si el negocio tiene el inventario en exceso, tendrá dificultades en su liquidez financiero, además de aumento del riesgo de corrosión de la madera. Por el contrario, si las existencias de materias primas son bajas demasiado, existe el riesgo de perder oportunidades por no poder atender los pedidos de los clientes.")
-    
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.write("La siguiente calculadora puede identificar el volumen del inventario de seguridad, que determina a la vez la cantidad necesaria del capital de trabajo.")
-            
-    st.header(" :red[Calculador del inventario de seguridad]", divider="red") 
-    st.write("###### :red[Es importante calcular el volumen del inventario de seguridad, que se refiere a la cantidad necesaria a mantener siempre para evitar escasez, en ciertas materias importnates, como maderas aserradas en la carpintería.]")  
-
-    a = st.number_input("¿Hace 5 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 30)
-    b = st.number_input("¿Hace 4 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 25)
-    c = st.number_input("¿Hace 3 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 45)
-    d = st.number_input("¿Hace 2 días (o semana) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 37)
-    e = st.number_input("¿Ayer (o semana pasada) cuántas piezas de madera aserrada se consumieron?", 0, 10000, 18)
-    g = st.number_input("¿Cuánto días (o semanas) debe esperar la recepción de maderas después de la colocación de la orden?", 0, 300, 5)
-    
-    
-    data = [a, b, c, d, e]
-    SD = np.std(data, ddof=1) 
-    import math
-    Inventario_seguridad1 = 2.33 * SD * math.sqrt(g)
-    Inventario_seguridad5 = 1.64 * SD * math.sqrt(g)   
-    Inventario_seguridad10 = 1.28 * SD * math.sqrt(g)
-
-    st.write("##### Resultado de cálculo:") 
-    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 1% (piezas)")
-    st.text(round(Inventario_seguridad1))
-    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 5% (piezas)")
-    st.text(round(Inventario_seguridad5))
-    st.write("###### Volumen de inventaruio de seguridad con la probabilidad de escasez de 10% (piezas)")
-    st.text(round(Inventario_seguridad10))
-
+        
 elif rubro == "Panadería":
     st.title("¿Cómo analizar la operación de Panadería?")
 
@@ -239,23 +209,7 @@ elif rubro == "Panadería":
         # Mensaje final obligatorio
         st.write("En una panadería, cuando hay una gran variedad de productos, tiende a aumentar los costos de venta. Sin embargo, si la variedad de productos es limitada, no será atractivo para los clientes. Es importante aumentar clientes habituales y diseñar una composición de productos adecuada basada en su demanda. Además, al utilizar colores como el marrón y el crema en el diseño interior y exterior de la tienda, se puede estimular el apetito por el pan.")
         st.image("pan.jpg", width = 400)
-
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.write("## :blue[Análisis de punto de equilibrio]") 
-    st.write("En un negocio como panadería, es fácil aplicar el análisis de punto de equilibrio, que puede identificar el monto a debe vender. La siguiente calculadora lo facilita.")
-    st.write("###### Se puede calcular la meta de venta, en base al análisis del punto de equilibrio. Mientras que el siguiente ejemplo se refiere a un caso de panadería, esta calculadora se puede aplicar en cualquier negocio.")  
-    a = st.number_input("Precio unitario (¿cuánto cuesta un paquete de panes a vender como promedio?, GTQ)", 1, 100000000000, 15)
-    b = st.number_input("Costo variable unitario (¿cuánto vale el costo de materias primas para un paquete?, GTQ)", 0, 100000000000, 3)
-    c = st.number_input("Costo fijo mensual (alquiler del espacio, depreciación de la maquina, costo de electricidad, etc., GTQ)", 1, 100000000000, 3000)
-    d = st.number_input("Ganancias mensuales que desea (GTQ)", 1, 10000000000, 800)
-    CM = a-b
-    CMR = CM/a
-    st.write("##### Monto de la venta necesaria para alcanzar la ganancia deseada (GTQ)")
-    st.text(round((c+d)/(CMR)))
-    st.write("##### Punto de equilibrio en venta (GTQ)")
-    st.text(round(c/CMR))
-                    
+                   
 elif rubro == "Restaurante(Comedor)":
     st.title("¿Como analizar la operación de Restaurante/Comedor?")
 
@@ -302,25 +256,6 @@ elif rubro == "Restaurante(Comedor)":
         
         # Mensaje final obligatorio
         st.write("En un restaurante, una amplia variedad de platos en el menú complica la adquisición de materias primas y la gestión de inventario. Además, si se producen faltantes, la incapacidad de atender los pedidos de los clientes puede generar insatisfacción. Por otro lado, si el menú es demasiado limitado, puede resultar poco atractivo para los clientes. Por lo tanto, es recomendable ofrecer un menú del día para evitar que los clientes se aburran y simplificar las operaciones al poder atender pedidos similares. Las ventas de un restaurante se pueden estimar en función de la cantidad de asientos, por lo que se recomienda utilizar la siguiente calculadora.")
-
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    
-    st.header(" :blue[Herramienta para estimar el monto de venta del comedor]", divider="blue") 
-    st.write("###### :blue[El monto de la venta de un restaurante o cafetería se puede estimar, aplicando esta calculadora. Así, la cooperativa podrá analizar la capacidad de pagos del negocio.]")  
-    a = st.number_input("¿Cuánto asientos tiene el comedor?", 0, 1000, 20)
-    b = st.number_input("Tasa de ocupacion de los asientos por los clientes (%)", 0, 100, 50)
-    c = st.number_input("Veces estimadas de rotación de los clientes al día", 1, 10, 3)
-    d = st.number_input("Promedio estimado de la venta por cliente (GTS)", 1, 1000, 40)
-    e = st.number_input("Días de operación al mes (Días)", 1, 31, 25)
-
-    st.write("###### :red[La tasa de ocupacion puede ser 50%, ya que sólo dos personas pueden ocupar la mesa para cuatro personas. La rotacion de los clientes al día puede ser 4 o 5 veces, como 2 rotaciones a horas de almuerzo y 2 rotaciones a horas de cena.]")
-    E = a*d*(b/100)*c
-
-    st.write("##### Resultado del cálculo: Monto esperado de la venta diaria")
-    st.text(E)
-    st.write("##### Resultado del cálculo: Monto esperado de la venta mensual")
-    st.text(E*e)
             
 elif rubro == "Negocio de impresión":
     st.title("¿Cómo analizar la operación del Negocio de impresión?")
