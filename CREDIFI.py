@@ -2,7 +2,8 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import openpyxl
+import io
 
 import time
 def main():
@@ -543,7 +544,7 @@ elif rubro == "Análisis de estados financieros":
     st.title("Análisis de estados financieros")
     st.write("###### Si la empresa solicitante tiene estados financieros, podrá analizarlos, aplicando el siguiente calculador.")
 
-    # Initial values
+    # 財務分析初期値
     initial_values = {
         "Cash": 2000,
         "Inventory": 8000,
@@ -561,10 +562,23 @@ elif rubro == "Análisis de estados financieros":
         "liabilities0": 17000,            
     }
 
-    # User inputs
-    col1, col2 = st.columns(2)
+    # ユーザー入力
+    # Col1, Col2, Col3の作成（間にスペースを挟む）
+    col1, col2_space, col2, col3_space, col3 = st.columns([1, 0.12, 1, 0.12, 1])
+
     with col1:
-        st.write("##### Resumen de Balances Generales")
+        st.write("##### :blue[1. Resumen de Estado de Resultados]")   
+        annual_sales = st.number_input("Ventas anuales", value=initial_values["Annual sales"])
+        cost_of_sales = st.number_input("Costo de ventas (producciones)", value=initial_values["Cost of sales (production)"])
+        admin_expenses = st.number_input("Gastos administrativos", value=initial_values["Administrative expenses"])
+        financial_costs = st.number_input("gastos financieros (pago de intereses)", value=initial_values["Financial costs"])
+    
+    # Col2 の前に仕切り線
+    with col2_space:
+        st.markdown("<div style='border-left: 2px solid black; height: 100%; margin-left: -20px;'></div>", unsafe_allow_html=True)
+
+    with col2:        
+        st.write("##### :blue[2. Resumen de Balances Generales]")
         cash = st.number_input("Efectivo", value=initial_values["Cash"])
         inventory = st.number_input("Inventario", value=initial_values["Inventory"])
         other_current_assets = st.number_input("Otros activos corrientes", value=initial_values["Other current assets"])
@@ -572,24 +586,24 @@ elif rubro == "Análisis de estados financieros":
         short_term_liabilities = st.number_input("Pasivos a corto plazo", value=initial_values["Short term liabilities"])
         long_term_liabilities = st.number_input("Pasivos a largo plazo", value=initial_values["Long term liabilities"])
         capital_equity = st.number_input("Capital propio", value=initial_values["Capital (equity)"])
-    with col2:        
-        st.write("##### Resumen del Estado de Resultados")   
-        annual_sales = st.number_input("Ventas anuales", value=initial_values["Annual sales"])
-        cost_of_sales = st.number_input("Costo de ventas (producciones)", value=initial_values["Cost of sales (production)"])
-        admin_expenses = st.number_input("Gastos administrativos", value=initial_values["Administrative expenses"])
-        financial_costs = st.number_input("gastos financieros (pago de intereses)", value=initial_values["Financial costs"])
+ 
+    # Col3 の前に仕切り線
+    with col3_space:
+        st.markdown("<div style='border-left: 2px solid black; height: 100%; margin-left: -20px;'></div>", unsafe_allow_html=True)
 
-        st.write("##### Informaciones financieras del año anterior (opcional)")
-        inventory0 = st.number_input("Inventario en el añó anterior", value=initial_values["Inventory0"])
+    with col3:
+        st.write("##### :blue[3. Informaciones de Balances del año anterior (opcional)]")
+        st.write("Si es disponible la información sobre activos y pasivos del año anterior a los que se mencionan en el punto 2, puede notarla abajo. (Si los Balances en el punto 2 corresponden al año 2023, abajo deberá notar los datos del año 2022.) En caso no disponible, note zero (0) en los siguientes cuadros.")
+        
+        inventory0 = st.number_input("Inventario en el año anterior", value=initial_values["Inventory0"])
         fixed_assets0 = st.number_input("Activos fijos en el año anterior", value=initial_values["Fixed assets0"])
-        liabilities0 = st.number_input("Pasivos totales en el año pasado", value=initial_values["liabilities0"])
-
-
-    # Calculations
+        liabilities0 = st.number_input("Pasivos totales en el año anterior", value=initial_values["liabilities0"])
+        
+    # 計算
     total_assets = cash + inventory + other_current_assets + fixed_assets
     total_liabilities_equity = short_term_liabilities + long_term_liabilities + capital_equity
 
-    # Financial Ratios
+    # 財務指標
     current_ratio = (cash + inventory + other_current_assets) / short_term_liabilities
     quick_ratio = (cash + other_current_assets) / short_term_liabilities
     cash_turnover_period = cash / (annual_sales / 12)
@@ -602,18 +616,21 @@ elif rubro == "Análisis de estados financieros":
     inventory_turnover_period = inventory / (annual_sales / 12)
 
     if st.button("Analizar"):
-
-        # Display results
+      
         if total_assets != total_liabilities_equity:
-            st.warning("El monto total de activos tiene que ser igual a la suma de la deuda y el capital propio.")
+            st.warning("El monto total de activos tiene que ser igual a la suma de la deuda y el capital propio. Los datos notados sobre Balances Generales no serían correctos, por ende, se presentan abajp sólo los indicadores de rentabilidad.")
             st.metric("Margen de beneficio bruto", round(gross_profit_margin * 100, 2))
             st.metric("Margen de beneficio operativo", round(operating_income_margin * 100, 2))
             st.metric("Margen de beneficio neto", round(net_profit_margin * 100, 2))
+  
         else:
-         # Mensaje final obligatorio
-            st.write("Será muy ideal que la Razón corriente sea 2 veces o más y la Razón rápida sea 1 vez o más, segun muchos libros de texto, aunque tales libros no son realísticos en algunos casos.")
-            st.write("Períodos de rotación de efectivo e inventario no tienen que ser mucho ni poco. Mucho período significa la ineficiencia operativa, y poco período quiere decir la falta de dichos recursos.")
-            
+            # 表示する内容を保存するリストを作成
+            output_text = []
+
+            # 必ず表示する文章
+            st.write("## :green[Resultados principales del análisis de Estados Financieros]")
+            st.write("Se presentan abajo los indicadores financieros principales ya calculados.")
+           
             col1, col2 = st.columns(2)
             with col1:
                 st.write("##### Indicadores de estabilidad y liquidez")
@@ -630,47 +647,214 @@ elif rubro == "Análisis de estados financieros":
                 st.metric("Margen de beneficio neto (%)", round(net_profit_margin * 100, 2))
                 st.metric("Período de rotación de inventario (meses)", round(inventory_turnover_period, 2))
                 
-             # Warnings
-            if current_ratio <= 1 or quick_ratio <= 0.6 or cash_turnover_period <= 0.8:
-                st.warning("El negocio puede tener dificultades en su liquidez.")
-            if operating_income_margin <= 0.05:
-                st.warning("La rentabilidad del negocio puede ser baja.")
-            if inventory_turnover_period >= 3:
-                st.warning("La eficiencia operativa, en términos de rotación de inventario puede ser baja.")
+            # 警告など（アプリ画面に表示）
+            st.write("Períodos de rotación de efectivo e inventario no tienen que ser largo ni corto. El período muy largo significa la ineficiencia operativa, y poco período implica posible falta de dichos recursos.")
+            st.write("Será ideal que la Razón corriente sea 2 veces o más y la Razón rápida sea 1 vez o más, segun muchos libros de texto, aunque en algunos casos no serían realísticos.")   
+            st.write("Si se observan algunos :red[puntos notables] en cuanto a indicadores presentados arriba, se presentarán abajo con el color amarillo. Si no se señalan algunos puntos negativos abajo, el negocio probablemente tendría la sanidad financiera, aunque la misma no se puede asegurar con solo el estudio de estos indicadores.")
+
+            # 条件に応じた警告メッセージ
+            if current_ratio < 1.2 or quick_ratio < 0.6:
+                warning_msg = "El negocio puede tener dificultades en su liquidez (o estabilidad financiera), considerando su razón corriente y/o ácida."
+                st.warning(warning_msg)
+                output_text.append(warning_msg)    
+
+            if quick_ratio > 1.0:
+                warning_msg = "Probablemente el negocio podrá tener buena liquidez financiera, considerando su razón rápida."
+                st.warning(warning_msg)
+                output_text.append(warning_msg)    
+
+            if current_ratio > 2.0:
+                warning_msg = "Probablemente el negocio podrá tener buen liquidez financiera, considerando su razón corriente."
+                st.warning(warning_msg)
+                output_text.append(warning_msg)    
+
+            if cash_turnover_period <= 0.7:
+                warning_msg = "Será probable que el negocio no tenga suficiente efectivo, considerando su nivel operativo."
+                st.warning(warning_msg)
+                output_text.append(warning_msg)
+
+            if operating_income_margin <= 0.03:
+                warning_msg = "La rentabilidad del negocio puede ser baja."
+                st.warning(warning_msg)
+                output_text.append(warning_msg)
+            
+            if gross_profit_margin <= 0.2:
+                warning_msg = "Margen de contribución puede ser baja. Deberá analizar posibles medidas para reducir los costos variables."
+                st.warning(warning_msg)
+                output_text.append(warning_msg)
+
+            if gross_profit_margin > 0.65:
+                warning_msg = "Margen de contribución puede ser alta."
+                st.warning(warning_msg)
+                output_text.append(warning_msg)
+
+            if fixed_assets*0.6 > capital_equity:
+                warning_msg = "Será probable que el nivel de inversión en activos fijos sea tan grande, considerando su monto del capital propio."
+                st.warning(warning_msg)
+                output_text.append(warning_msg)
+
+            if capital_adequacy_ratio <= 0.3:
+                warning_msg = "Podría ser insuficiente la estabilidad financiera, en términos de la Razón de adecuación de capital, sobre todo en caso que el negocio sea de industria productiva o construcción."         
+                st.warning(warning_msg)
+                output_text.append(warning_msg)
+
+            if inventory_turnover_period > 2.5:
+                warning_msg = "La eficiencia operativa, en términos de rotación de inventario podrá ser baja."
+                st.warning(warning_msg)
+                output_text.append(warning_msg)
+
+            if inventory_turnover_period < 0.5:
+                warning_msg = "La eficiencia operativa, en términos de rotación de inventario podrá ser alta, pero, posiblemente la falta de inventario se ocurriría."
+                st.warning(warning_msg)
+                output_text.append(warning_msg)
+
             if cash_turnover_period >= 3:
-                st.warning("La eficiencia operativa, en términos de rotación de efectivo puede ser baja.")
-            if times_interest_earned <= 1 or capital_adequacy_ratio <= 0.5:
-                st.warning("El negocio puede estar altamente endeudado, considerando su nivel de ganancias o nivel del capital propio.")
-            
-            st.write("El resultado del flujo de caja de la emperesa se presenta abajo. Si el flujo de caja en operación es positivo, el negocio genera beneficios para hacer inversiones en muchos casos. Si el flujo de caja en inversiones es poistivo, el negocio posiblemente vende sus activos fijos para cubrir las pérdidas operativas o pagos de deuda. Si el flujo de caja en finanzas es positivo, la empresa utiliza los préstamos para sus operaciones y/o inversiones.")
-            # Cashflow values
-            OperationalCF = annual_sales - cost_of_sales - admin_expenses - financial_costs + inventory0 - inventory
-            InvestmentCF = fixed_assets0 - fixed_assets
-            FinancialCF = short_term_liabilities + long_term_liabilities - liabilities0 
-           
-            # Data for plotting
-            cashflows = {                
-                'Flujo de caja en Operación': OperationalCF,
-                'Flujo de caja en Inversión': InvestmentCF,
-                'Flujo de caja en Finanzas': FinancialCF
-            }
+                warning_msg = "La eficiencia operativa, en términos de rotación de efectivo puede ser baja."
+                st.warning(warning_msg)
+                output_text.append(warning_msg)
 
-            # Colors based on value
-            colors = ['blue' if value >= 0 else 'red' for value in cashflows.values()]
+            if times_interest_earned <= 0.9:
+                warning_msg = "El negocio podrá estar muy endeudado, considerando su nivel de ganancias."
+                st.warning(warning_msg)
+                output_text.append(warning_msg)
+
+            # 指標を縦方向に並べるために、キーをインデックス、値を列にする
+            df_metrics = pd.DataFrame({
+                "Indicador": [
+                    "Razón corriente (veces)",
+                    "Razón rápida (veces)",
+                    "Período de rotación de efectivo (meses)",
+                    "Razón de adecuación de capital (veces)",
+                    "Veces de interés ganado (veces)",
+                    "Margen sobre activos totales (%)",
+                    "Margen de beneficio bruto (%)",
+                    "Margen de beneficio operativo (%)",
+                    "Margen de beneficio neto (%)",
+                    "Período de rotación de inventario (meses)"
+                ],
+                "Valor": [
+                    round(current_ratio, 2),
+                    round(quick_ratio, 2),
+                    round(cash_turnover_period, 2),
+                    round(capital_adequacy_ratio * 100, 2),
+                    round(times_interest_earned, 2),
+                    round(roi * 100, 2),
+                    round(gross_profit_margin * 100, 2),
+                    round(operating_income_margin * 100, 2),
+                    round(net_profit_margin * 100, 2),
+                    round(inventory_turnover_period, 2)
+                ]
+            })
+
+            # output_textをDataFrameに変換する
+            df_text = pd.DataFrame({"Notas": output_text})
+
+            # df_metricsの下にdf_textを追加する
+            df_combined = pd.concat([df_metrics, df_text], ignore_index=True)
+
+            # バッファにExcelファイルを書き込む
+            buffer = io.BytesIO()
+            with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+                df_combined.to_excel(writer, index=False)
+
+                # 書き込んだエクセルワークブックとシートを取得
+                workbook = writer.book
+                worksheet = writer.sheets['Sheet1']  # デフォルトのシート名は 'Sheet1'
+
+                # 各列の幅を20に設定
+                for column in worksheet.columns:
+                    worksheet.column_dimensions[column[0].column_letter].width = 20
+
+            # ファイルのダウンロードリンクを作成
+            st.download_button(
+                label="Descargar el resultado del estudio en Excel",
+                data=buffer.getvalue(),
+                file_name='resultado_financiero.xlsx',
+                mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            )
             
-            # Plotting
+            # 損益分岐点分析
+            # 必ず表示する文章
+            st.write("## :green[Resultado del análisis del punto de equilibrio]")
+            st.write("Se presentan abajo el resultado del análisis del punto de equilibrio, aunque el mismo podrá ser impreciso, suponiendo que costos de venta se clasifican en costos variables y los otros costos en fijos.")
+            
+            variable_ratio = cost_of_sales/annual_sales
+            breakeven_sales = (admin_expenses + financial_costs) / (1-variable_ratio)
+
+            st.write(f"Posible monto de ventas anuales en el punto de equilibrio: {breakeven_sales:.2f} GTQ")
+
             fig, ax = plt.subplots()
-            ax.barh(list(cashflows.keys()), list(cashflows.values()), color=colors)
+        
+            sales_range = list(range(int(breakeven_sales * 0.8), int(breakeven_sales * 1.2), 100))
+            total_costs = [admin_expenses + financial_costs + (variable_ratio * s) for s in sales_range]
             
-            # Adding labels
-            for index, value in enumerate(cashflows.values()):
-                ax.text(value, index, f'{value}', va='center', ha='left' if value >= 0 else 'right')
+            ax.plot(sales_range, total_costs, color='skyblue', label="Costos totales (Costos fijos + Costos variables)", marker='o')
+            ax.plot(sales_range, sales_range, color='orange', label="Venta", marker='o')
+            
+            ax.set_title("Estimación del punto de equilibrio")
+            ax.set_xlabel("Venta (GTQ)")
+            ax.set_ylabel("Costos y ventas (GTQ)")
+            
+            ax.axvline(breakeven_sales, color='red', linestyle='--', label=f"Punto de equilibrio: {breakeven_sales:.2f} GTQ")
+            
+            ax.fill_between(sales_range, total_costs, sales_range, where=[s > breakeven_sales for s in sales_range], color='skyblue', alpha=0.3, interpolate=True)
+            
+            mid_x = breakeven_sales * 1.1
+            mid_y = (max(total_costs) + max(sales_range)) / 2
+            ax.text(mid_x, mid_y, "Ganancia = Área del color azul claro", color="blue", fontsize=7, ha="left")
 
-            ax.set_xlabel('Cantidad (GTQ)')
-            ax.set_title('Resumen del resultado del análisis del flujo de caja')
-
-            # Display in Streamlit
+            ax.legend()  # Show the legend
             st.pyplot(fig)
 
+            # キャッシュフロー分析を行う場合
+            if inventory0 != 0 and fixed_assets0 != 0 and liabilities0 != 0:
+                # Cashflow values
+                OperationalCF = annual_sales - cost_of_sales - admin_expenses - financial_costs + inventory0 - inventory
+                InvestmentCF = fixed_assets0 - fixed_assets
+                FinancialCF = short_term_liabilities + long_term_liabilities - liabilities0 
+            
+                cashflows = {                
+                    'En Operación': OperationalCF,
+                    'En Inversión': InvestmentCF,
+                    'En Finanzas': FinancialCF
+                }
+
+                st.write("## :green[Resultado del análisis del flujo de caja]")
+                if OperationalCF<0 and InvestmentCF+FinancialCF>0:
+                    st.write("El flujo de caja en operaciones es negativo, por ende, la empresa habría necesitado los créditos y/o las ventas de sus activos. Esta condición no es apropiada para la sustentabilidad financiera del negocio.")
+                if FinancialCF>0 and InvestmentCF<0:
+                    st.write("La empresa habría necesitado los créditos para la inversión.")
+                if OperationalCF>0 and InvestmentCF<0:
+                    st.write("La empresa habría utilizado sus ganancias para la inversión.")            
+                if OperationalCF>InvestmentCF and OperationalCF>FinancialCF:
+                    st.write("El flujo de caja del negocio será sano.")
+                if InvestmentCF>0 and 0>FinancialCF:
+                    st.write("La empresa habrá reducido sus deudas, vendiendo sus activos.")
+                if OperationalCF>0 and 0>FinancialCF:
+                    st.write("La empresa habrá reducido sus deudas, utilizando sus ganancias.")
+
+                # 正負での色分別
+                colors = ['blue' if value >= 0 else 'red' for value in cashflows.values()]
+                
+                # キャッシュフロー図の表示
+                fig, ax = plt.subplots()
+
+                # 棒グラフを描画、太さはwidthで調整
+                ax.bar(list(cashflows.keys()), list(cashflows.values()), color=colors, width=0.6)  # デフォルトの半分の太さに設定
+
+                # ゼロのところに横線を追加
+                ax.axhline(0, color='black', linewidth=1)
+
+                # ラベルの追加
+                for index, value in enumerate(cashflows.values()):
+                    ax.text(index, value, f'{value}', ha='center', va='bottom' if value >= 0 else 'top')
+
+                ax.set_ylabel('Cantidad (GTQ)')
+                ax.set_xlabel('Categorías del Flujo de Caja')
+                ax.set_title('Resumen del resultado del análisis del flujo de caja')
+
+                # Streamlitで表示
+                st.pyplot(fig)
 
 
+                    
