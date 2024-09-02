@@ -742,7 +742,7 @@ elif rubro == "Análisis de estados financieros":
             st.pyplot(fig)
 
             # キャッシュフロー分析を行う場合
-            if inventory0 != 0 and fixed_assets0 != 0 and liabilities0 != 0:
+            if inventory0 != 0 and fixed_assets0 != 0:
                 # Cashflow values
                 OperationalCF = annual_sales - cost_of_sales - admin_expenses - financial_costs + inventory0 - inventory
                 InvestmentCF = fixed_assets0 - fixed_assets
