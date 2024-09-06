@@ -27,52 +27,74 @@ elif rubro == "Capital de trabajo":
     st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Abajo se presentan los puntos a analizar la solicitud para el capital de trabajo.") 
     st.write("###### El capital de trabajo se necesita para mantener la operación diaria del negocio. Algunas veces, la cantidad necesaria del capital de trabajo se puede aumentar, por (i) la expansión del negocio, (ii) el inventario sobrante, (iii) los costos operativos elevados, (iv) el motivo temporal, etc.") 
 
-
     st.write("#### :red[Lista de chequeo]", divider="red") 
     st.write("###### :red[Con relación a la solicitud del crédito para el capital de trabajo, deberá averiguar los siguientes.]")
-    OP1 = st.checkbox("¿El negocio no tiene el inventario sobrante? ¿No tiene saldos de productos que estén fuera de temporada o de moda, que sean difíciles de vender? (Si hay un aumento alto en la cantidad de inventario de productos, ¿tiene una causa razonable?)")
-    OP2 = st.checkbox("¿Considera que las ventas y compras de los productos están y estrían estables hoy y en el futuro? (En caso no afirmativo, ¿la empresa aplica ciertas medidas para mejorar?)")
-    OP3 = st.checkbox("¿El valor de las cuentas por cobrar no es alto en este tiempo? ¿Esta situación responde porque no ha habido un aumento drástico en operaciones recientes?")
-    OP4 = st.checkbox("¿El aumento de la necesidad del capital de trabajo se genera por la ineficiencia operativa, tales como la reducción drástica de la venta, aumento considerable del costos operativos, etc.? (En caso afirmativo, ¿la empresa aplica ciertas medidas para solucionarla?)")
+    OP1 = st.checkbox("¿Las ventas del negocio, que son fuentes de reembolso, han sido estables o están aumentándose?")    
+    OP2 = st.checkbox("¿Las compras de materias primas o productos a revender han sido estables?")
+    OP3 = st.checkbox("¿El valor de las cuentas por cobrar no es alto, considerando su nivel de ventas?")
+    OP3 = st.checkbox("¿El negocio no tiene el inventario sobrante? ¿No tiene saldos de productos que estén fuera de temporada o de moda, que sean difíciles de vender?")
+    OP4 = st.checkbox("¿El aumento de la necesidad del capital de trabajo se genera por la ineficiencia operativa, tales como la reducción de la venta, aumento considerable del costos operativos, etc.?")
+    Op5 = st.checkbox("Si la solicitud es para el capital de trabajo eventual, como el fondo para la compra de artículos a revender en la Navidad, ¿el período de amortizaición solicitado es corto?")
+    OP6 = st.checkbox("Si la colicitud es para el capital de trabajo normal, ¿el monto solicitado no supera el monto calculado, mediante la siguiente calculadora?")
+
+    st.write("##### :blue[Calculadora del monto total necesario del capital de trabajo normal del negocio]")  
+    col1, col2, col3 = st.columns(3)
+    with col1: 
+        e = st.number_input("Valor del inventario (GTQ)", 1, 10000000000000, 8000)
+    with col2:
+        f = st.number_input("Cuentas por pagar (GTQ)", 1, 10000000000000, 2000)
+    with col3:
+        g = st.number_input("Cuentas por cobrar (GTQ)", 1, 1000000000000, 4000)
+    h = e + g - f
+    st.write("##### Resultado del cálculo: Monto total necesario del capital de trabajo normal (GTQ):")
+    st.text(h)
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
         st.write("## :blue[Sugerencias]")
-        selected_count = sum([OP1, OP2, OP3, OP4])
+        selected_count = sum([OP1, OP2, OP3, OP4, OP5, OP6])
         # Mensaje principal basado en la cantidad de selecciones
-        if selected_count == 4:
+        if selected_count == 6:
             st.write("Probablemente se ha observado bien.")
             st.balloons()
         else:
-            st.write("La demanda del capital de trabajo se aumentará por (i) la ineficiencia operativa, y (ii) condiciones inapropiadas de compras y ventas. Si la ineficiencia operativa genera la demanda adicional del capital, es importante asesorar el negocio con miras a su mejora.")
+            st.write("La demanda del capital de trabajo se aumentará por (i) la ineficiencia operativa, (ii) aumento del inventario, y/o (ii) condiciones inapropiadas de compras y ventas. Si la ineficiencia operativa genera la demanda adicional del capital, es importante asesorar el negocio para su mejora.")
 
-    # Mensaje final obligatorio
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.write("La siguiente calculadora puede identificar el monto total necesario del capital de trabajo normal de la empresa. El monto solicitado del crédito no debe superar el monto calculado.")
-
-    st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
-    st.write("###### :blue[Calculadora del monto total necesario del capital de trabajo normal del negocio]")  
-    e = st.number_input("Valor del inventario (GTQ)", 1, 10000000000000, 8000)
-    f = st.number_input("Cuentas por pagar (GTQ)", 1, 10000000000000, 2000)
-    g = st.number_input("Cuentas por cobrar (GTQ)", 1, 1000000000000, 4000)
-    h = e + g - f
-
-    st.write("##### Resultado del cálculo: Monto total necesario del capital de trabajo normal (GTQ):")
-    st.text(h)
+        # Mensajes adicionales para checkboxes no seleccionados
+        if not OP5:
+            st.write("La demanda del capital de trabajo eventual se genera por la necesidad temporada. Por esta razón, el período de amortización deberá ser corto. Si el empresario desea el período largo, posiblemente usará el fondo para otros motivos.")
+        if not OP6:
+            st.write("El monto necesario del capital de trabajo normal se puede calucular como `inventario + cuentas por cobrar - cuentas por pagar`. Si el empresario solicita más monto, posiblemente tendrá otros motivos.")
 
 elif rubro == "Capital de inversiones":
     st.write("#### :green[¿Qué tenemos que analizar la solicitud del crédito para el capital de inversión?]") 
     st.write("###### Cuando una cooperativa recibe la solicitud del crédito, primero, tendrá que analizar el objetivo del uso del crédito. Abajo se presentan los puntos a analizar la solicitud para el capital de inversión.") 
-    st.write("###### La inversión se hace para (i) montar o expandir el negocio, (ii) desarrollar nuevos productos y/o (iii) sustituir equipos ya viejos. Cabe decir que la inversión aumentará las necesidades del capital de trabajo.") 
+    st.write("###### La inversión se puede realizar para (i) montar o expandir el negocio, (ii) desarrollar nuevos productos y/o (iii) sustituir equipos ya desactualizados. Cabe decir que la inversión aumentará las necesidades del capital de trabajo.") 
 
     st.write("#### :red[Lista de chequeo]", divider="red") 
     st.write("###### :red[Con relación a la solicitud del crédito para el capital de inversión, deberá averiguar los siguientes.]")
-    OP1 = st.checkbox("¿El motivo de inversión es razonable? (Posibles motivos pueden incluir; compra del equipo nuevo para aumentar la producción, sustitución de equipos ya viejos, y/o desarrollo de nuevos mercados y negocios.)")
-    OP2 = st.checkbox("¿La empresa podrá esperar un aumento de la venta por la inversión de nueva maquinaria, recibiendo las ordenes de los clientes?")
+    OP1 = st.checkbox("¿El motivo de inversión es razonable? (Posibles motivos pueden incluir; compra del equipo nuevo para aumentar la producción, sustitución de equipos desactualizados, y/o desarrollo de nuevos mercados y negocios.)")
+    OP2 = st.checkbox("¿La venta del negocio se aumentará por la inversión? (Cabe señalar que la inversión para la remoderación de la oficina genera menos contribución que la inversión para la maquinaria productiva.)")
     OP3 = st.checkbox("¿La inversión no causará la falta del capital de trabajo, mediante el aumento de costos operativos, incluyendo la compra aumentada de materias primas, costos financieros elevados, etc.?")
-    OP4 = st.checkbox("¿El monto de ganancia (más depreciación) supera el importe de reembolso del crédito?")
-    OP5 = st.checkbox("¿El negocio tiene suficiente espacio para instalar el equipo a comprar?")
-
+    OP4 = st.checkbox("¿El negocio tiene suficiente espacio para instalar el equipo a comprar?")
+    OP5 = st.checkbox("¿El monto de ganancia (más depreciación) supera el importe de reembolso del crédito? ¿El valor presente neto (VPN) del proyecto de inversión es positivo y suficiente? (VPN puede calcularse mediante la siguiente calculadora.)")
+   
+    st.write("##### :blue[Calculadora del valor presente neto del proyecto]")  
+    col1, col2 = st.columns(2)
+    with col1: 
+        a = st.number_input("¿Cuánto se debe invertir al inicio del proyecto (GTQ)?", 0, 10000000000000, 50000)
+        b = st.number_input("¿Cuál es tasa de costo del capital del negocio (%)?", 0, 100, 12)
+    with col2:
+        c = st.number_input("¿Cuánto podrá ganar al año por el proyecto de inversión? (De manera más precisa tiene que decirse como el flujo anual de caja, que es casi igual a ganancias menos depreciación: GTQ)", 1, 1000000000000, 20000)
+        d = st.number_input("Duración del proyecto (años)", 1, 100, 4)
+    
+    lst = [c for i in range(d)]
+    lst0 = [-1 * a]
+    lst = lst0 + lst
+    npv = sum(lst / (1 + b/100) ** t for t, lst in enumerate(lst)) 
+    rate = b/100
+    st.write("#### Valor Presente Neto (VPN) de la inversión (GTQ):")
+    st.text(f"VPN: {round(npv)}")
+    
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
         st.write("## :blue[Sugerencias]")
         selected_count = sum([OP1, OP2, OP3, OP4, OP5])
@@ -81,30 +103,12 @@ elif rubro == "Capital de inversiones":
             st.write("Probablemente se ha observado bien.")
             st.balloons()
         else:
-            st.write("La inversión puede generar no sólo el aumento de la producción sino tambien el aumento de costos operativos, posiblemente cansando la falta de liquidez del negocio. Por lo cual, es importante analizar si la inversión será oportuna o no, considerando la situación de mercado, o sea, la demanda de cliente, y la competencia con sus competidores.")
+            st.write("La inversión podrá aumentar no sólo la producción del negocio sino también los costos operativos. Por lo cual, es importante analizar si la inversión será oportuna o no, considerando la situación de mercado, o sea. los clientes y competidores.")
 
-    # Mensaje final obligatorio
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.markdown("<br><br><br>", unsafe_allow_html=True)  # 3行分のスペースを挿入
-    st.write("Es importante analizar si el proyecto de la inversión es apropiada o no, aplicando la siguiente calculadora.")
-
-    st.write("#### :blue[Herramienta para el análisis]", divider="blue") 
-    st.write("###### :blue[Calculadora del valor presente neto del proyecto]")  
-    a = st.number_input("¿Cuánto se debe invertir al inicio del proyecto (GTQ)?", 0, 10000000000000, 50000)
-    b = st.number_input("¿Cuál es tasa de costo del capital del negocio (%)?", 0, 100, 12)
-    c = st.number_input("¿Cuánto podrá ganar al año por el proyecto de inversión? (De manera más precisa tiene que decirse como el flujo anual de caja, que es casi igual a ganancias menos depreciación: GTQ)", 1, 1000000000000, 20000)
-    d = st.number_input("Duración del proyecto (años)", 1, 100, 4)
-
-
-    lst = [c for i in range(d)]
-    lst0 = [-1 * a]
-    lst = lst0 + lst
-    npv = sum(lst / (1 + b/100) ** t for t, lst in enumerate(lst)) 
-    rate = b/100
-        
-    st.write("#### Valor Presente Neto (VPN) de la inversión (GTQ):")
-    st.text(f"VPN: {round(npv)}")
-    st.write("###### :blue[La inversion con VPN negativo o insuficiente deberá rechazarse.]")
+        if not OP1:
+            st.write("La producitvidad del negocio se podrá mejorar, sin la inversión en algunas ocaciones, mediante la línea productiva balanceada u otras medidas. Será importante analizar si la inversión solicitada es escencial para la expansión del negocio.")
+        if not OP2:
+            st.write("Es importante que la maquinaria invertida contribuya para el aumento de la venta. En este sentido, deberá analizar si el negocio tiene clientes quienes podrán colocar ordenes suficientemente.")
 
 elif rubro == "Carpintería":
     st.title("¿Cómo analizar la operación de Carpintería?")
@@ -155,8 +159,10 @@ elif rubro == "Carpintería":
             st.write("El tiempo largo entre la compra de materias primas hasta la entrega de los productos a los clientes, aumentará la demanda del capital de trabajo.")
         
         # Mensaje final obligatorio
-        st.write("Si la empresa se dedica principalmente a la producción prospectiva para el inventario y vende alta variedad de productos, será esencial aumentar (1) la proporción de producción basada de las órdenes de los clientes y (2) los productos con diseños semejantes, reduciendo el coste de las materias primas y aumentando los beneficios, con ventas estables. Es importante que la empresa mantenga el inventario de maderas aserradas de seguridad con el volumen apropiado. Si el negocio tiene el inventario en exceso, tendrá dificultades en su liquidez financiero, además de aumento del riesgo de corrosión de la madera. Por el contrario, si las existencias de materias primas son bajas demasiado, existe el riesgo de perder oportunidades por no poder atender los pedidos de los clientes.")
-        
+            st.write("Si la empresa se dedica principalmente de la producción para el inventario, más que la producción basada de las oredes de los clientes, la demanda del capital de trabajo se aumentará.")
+            st.write("Muchos talleres de la carpintería suelen tener un espacio limitado, mientras que las materias primas y los productos se deben guardar de manera que no se mojen por la lluvia. Es importante ordenas coas y hacer limipezas todos los días, para guardar bien las materias primas, evitar accidentes laborales, y mantener y mejorar la productividad.")
+            st.image("CAR.jpg", width = 400)
+            
 elif rubro == "Panadería":
     st.title("¿Cómo analizar la operación de Panadería?")
 
@@ -204,10 +210,11 @@ elif rubro == "Panadería":
         if not OP4:
             st.write("Aunque la aplicación de redes sociales será importante, la misma aumentará la carga de trabajos.")
         if not OP5:
-            st.write("Posibles medidas para aumentar clientes fijos incluyen; (i) Emitir tarjetas de fidelidad para ofrecer descuentos a los clientes que compran con frecuencia, (ii) lanzar nuevos productos cada mes para mantener a los clientes habituales interesados, (iii) ofrecer una taza de café gratis a los clientes que compran pan, etc.")
+            st.write("Posibles medidas para aumentar clientes fijos incluyen; (i) lanzar nuevos productos cada mes para mantener a los clientes habituales interesados, (ii) ofrecer una taza de café gratis a los clientes que compran pan, etc.")
         
         # Mensaje final obligatorio
-        st.write("En una panadería, cuando hay una gran variedad de productos, tiende a aumentar los costos de venta. Sin embargo, si la variedad de productos es limitada, no será atractivo para los clientes. Es importante aumentar clientes habituales y diseñar una composición de productos adecuada basada en su demanda. Además, al utilizar colores como el marrón y el crema en el diseño interior y exterior de la tienda, se puede estimular el apetito por el pan.")
+        st.write("En una panadería, cuando hay una gran variedad de productos, tiende a aumentar los costos de venta. Sin embargo, si la variedad de productos es limitada, no será atractivo para los clientes. Es importante aumentar clientes habituales y diseñar una composición de productos adecuada basada en su demanda.")
+        st.write("Una inversión para remodelación de la tienda tiene cierta probabilidad que no genere el aumento de ventas. Sin embargo, se puede decir que utilizar colores como el marrón y el crema en el diseño interior y exterior de la tienda puede estimular el apetito por el pan.")
         st.image("pan.jpg", width = 400)
                    
 elif rubro == "Restaurante(Comedor)":
@@ -255,7 +262,8 @@ elif rubro == "Restaurante(Comedor)":
             st.write("Si en una misma zona hay restaurantes que se diferencian entre sí, se puede aumentar el volumen de ventas de toda la zona. Por ejemplo, si en una misma zona hay una pizzería, un restaurante de comida peruana y un comedor de carne asado, pueden atraer a diferentes tipos de clientes sin competir directamente entre sí, aumentando así el atractivo general de la zona.")
         
         # Mensaje final obligatorio
-        st.write("En un restaurante, una amplia variedad de platos en el menú complica la adquisición de materias primas y la gestión de inventario. Además, si se producen faltantes, la incapacidad de atender los pedidos de los clientes puede generar insatisfacción. Por otro lado, si el menú es demasiado limitado, puede resultar poco atractivo para los clientes. Por lo tanto, es recomendable ofrecer un menú del día para evitar que los clientes se aburran y simplificar las operaciones al poder atender pedidos similares. Las ventas de un restaurante se pueden estimar en función de la cantidad de asientos, por lo que se recomienda utilizar la siguiente calculadora.")
+        st.write("En un restaurante, una amplia variedad de platos en el menú complica la adquisición de materias primas y la gestión de inventario. Además, si se producen faltantes, la incapacidad de atender los pedidos de los clientes puede generar insatisfacción. Por otro lado, si el menú es demasiado limitado, puede resultar poco atractivo para los clientes. Por lo tanto, es recomendable ofrecer un menú del día para evitar que los clientes se aburran y simplificar las operaciones al poder atender pedidos similares. Las ventas de un restaurante se pueden estimar en función de la cantidad de asientos.")
+        st.write("Una inversión para remodelación de la tienda tiene cierta probabilidad que no genere el aumento de ventas.")
             
 elif rubro == "Negocio de impresión":
     st.title("¿Cómo analizar la operación del Negocio de impresión?")
@@ -264,7 +272,7 @@ elif rubro == "Negocio de impresión":
     with col1:
         st.write("### :blue[Necesidades del capital de trabajo]")
         st.write("###### Los negocios de la impresión suelen basarse de la demanda local. Si una empresa tiene cierto número de clientes habituales, su flujo de caja podrá ser estable.")
-        st.write("###### La mayoría (alrededor de 70%) de los costos operativos son de los papeles. Si la empresa los compra en efectivo, necesitará el monto relativamente alto del capital de trabajo.")
+        st.write("###### La mayoría (alrededor de 70%) de los costos operativos (excepto por la depresiación de la maquinaria) son de los papeles. Si la empresa los compra en efectivo, necesitará el monto relativamente alto del capital de trabajo.")
         st.write("###### La cooperativa deberá analizar si el objetivo de la solicitud del crédito es apropiado o no." )
 
         st.write("### :blue[Necesidades del capital de inversión]")
@@ -276,7 +284,7 @@ elif rubro == "Negocio de impresión":
         st.write("### :green[Lista de chequeo]")
         st.write("##### :green[Marque todos los puntos que la empresa ha logrado.]")
         OP1 = st.checkbox("Dado que muchos negocios de impresión son de la industria intensiva en la maquinaria, el monto de ganancias depende mucho de la tasa de utilización de los equipos de imprenta. ¿El negocio tiene suficientes clientes locales, que colocan las ordenes directas para que la empresa mantenga alta tasa de utilización de los equipos?")
-        OP2 = st.checkbox("La tasa de utilización de los equipo de imprenta puede bajarse por (i) el tiempo preparatorio largo, (ii) los cambios operativos frecuentes y/o (iii) la falta del mantenimineto ¿No se observan estos?"  )
+        OP2 = st.checkbox("La tasa de utilización de los equipo de imprenta puede bajarse por (i) el tiempo preparatorio largo, (ii) los cambios operativos frecuentes y/o (iii) la falta del mantenimineto. ¿No se observan estos?"  )
         OP3 = st.checkbox("¿La tecnología aplicada de la empresa es bien actualizada, en términos de diseño gráfico e impresión en diferentes materiales tales como ropas, letrero de anuncio, etc.? ¿Así sus productos y servicios ya están bien diversificados?" )
 
     if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):
@@ -294,12 +302,12 @@ elif rubro == "Negocio de impresión":
         
         # Mensajes adicionales para checkboxes no seleccionados
         if not OP1 or not OP2:
-            st.write("La elavación de la tasa de operación del equipo será escencial para aumentar las ganacias, en caso del negocio intensivo en la maquinaria como la empresa de impresión.")
+            st.write("La elavación de la tasa de operación del equipo será escencial para aumentar las ganancias, en caso del negocio intensivo en la maquinaria como la empresa de impresión.")
         if not OP3:
-            st.write("La actualizacion de la tecnología requiere el empleo de ingenieros nuevos y/o la compra de nueva maquinaria. Es importante analizar si vale la pena realizar dichas medidas para la innovación, considerando la situación de clientes y competidores.")
+            st.write("La actualización de la tecnología requiere el empleo de ingenieros nuevos y/o la compra de nueva maquinaria. Es importante analizar si vale la pena realizar dichas medidas para la innovación, considerando la situación de clientes y competidores.")
         
         # Mensaje final obligatorio
-        st.write("En un negocio de impresión, la operación depende de las ordenes de los clientes. Es decir, el negocio inicia el diseño y prepara el arreglo de la maquinaria, después de la recepción de la orden, puesto que la empresa deberá producir los productos variados, dependiendo de las ordenes. En este sentido, la mejora de ediciencia operativa en términos de la ingeniería industrial, es uno de los temas importantes.")
+        st.write("En un negocio de impresión, la operación depende de las ordenes de los clientes. Es decir, el negocio inicia el diseño y prepara el arreglo de la maquinaria, después de la recepción de la orden, puesto que la empresa deberá producir los productos variados, dependiendo de las ordenes. En este sentido, la mejora de eficiencia operativa en términos de la ingeniería industrial, es uno de los temas importantes.")
 
 elif rubro == "Construcción":
     st.title("¿Cómo analizar la operación del negocio de Construcción?")
@@ -341,7 +349,7 @@ elif rubro == "Construcción":
             st.write("El manejo del capital de trabajo es uno de los temas pripriotarios en el negocio de construcción. Si el negocio debe mantener cierto volumen del inventario de materias primas, tendrá que identificar el volumen apropiado a mantener.")
         
         # Mensaje final obligatorio
-        st.write("En el negocio de construcción, la demanda depende mucho de la economía local y su flujo circulante de fondos. Además, el mismo negocio puede generar la demanda de otras industrias. En este sentido, es importante analizar tambien el entorno del negocio también para el desarrollo del negocio.")
+        st.write("En el negocio de construcción, la demanda depende mucho de la economía local y su flujo circulante de fondos. Es importante analizar el entorno del negocio también.")
 
 elif rubro == "Corte y confección":
     st.title("¿Cómo analizar la operación del negocio de Corte y confección?")
@@ -380,9 +388,10 @@ elif rubro == "Corte y confección":
         
         # Mensajes adicionales para checkboxes no seleccionados
         if not OP1 or not OP2 or not OP3 or not OP4:
-            st.write("Procesos de producción en la industria textil tienden a ser complejos. En el caso de las camisas, a menudo se cose por separado las mangas, el cuello y la parte principal, para luego unirlas. En estos casos, si la capacidad de producción de cada componente es variada, aumentará los productos en proceso. Además, si la máquina de coser se descompone con frecuencia en el proceso de unir las diferentes partes, la producción en total se diseminuirá. Será importante asegurar que dicho proceso no se convierta en un cuello de botella. Estos puntos señalados tienen que considerarse, para aumentar las ganancias, reduciendo el monto necesario del capital de trabajo.")
+            st.write("Procesos de producción en la industria textil tienden a ser complejos. En muchos casos de la producción de camisas, se cosen separadamente las mangas, el cuello y la parte principal, para luego unirlas. En este sentido, si la capacidad de producción de cada componente es variada, aumentará los productos en proceso. Además, si la máquina de coser se descompone con frecuencia en el proceso de unir las diferentes partes, la producción en total se diseminuirá. Será importante asegurar que dicho proceso no se convierta en un cuello de botella. Una empresa mediana emplea cierto número de empleados, y la división de trabajos entre ellos podrá generar la línea productiva no balanceada, aumentando la demanda del capital de trabajo. Estos puntos tienen que considerarse para mejorar sus ganancias.")
+            st.image("CORTE.jpg", width = 400)
         if not OP5:
-            st.write("La operación de un negocio de corte y confección se basa de las ordenes de los clientes, por ende, el suficiente número de clientes fieles podrá aumentar la eficiencia operativa.")
+            st.write("La operación de un negocio de corte y confección se basa de las ordenes de los clientes en muchos casos, por ende, el suficiente número de clientes fieles podrá aumentar la eficiencia operativa.")
         
         # Mensaje final obligatorio
         st.write("En la mejora de la gestión y la evaluación de necesidades de capital en la industria textil, la existencia de clientes estables y el equilibrio de las líneas productivas suelen ser factores importantes.")
@@ -429,7 +438,7 @@ elif rubro == "Mercadito(Pulpería)":
         
         # Mensaje final obligatorio
         st.write("La demanda del capital de trabajo depende de compras e inventario de artículos a vender. Dependiendo de la necesidad, será importante asesorar para adecuar proveedores del negocio.")
-        
+        st.write("Una inversión para remodelación de la tienda tiene cierta probabilidad que no genere el aumento de ventas.")
     
 elif rubro == "Reparación del auto":
     st.title("¿Cómo analizar la operación del negocio de Reparación del auto?")
@@ -466,14 +475,14 @@ elif rubro == "Reparación del auto":
             else:
                 st.write("El negocio tiene que fortalecerse.")
             
-        # Mensajes adicionales para checkboxes no seleccionados
-        if OP2:
-            st.write("Si clientes habituales pagan a crédito, la demanda del capital de trabajo se aumentará.")
-        if OP4:       
-            st.write("Si no hay proveedores apropiados cerca del negocio, el negocio deberá tener el inventario de las partes. Eso aumentará la demanda del capital de trabajo.")
-            
-        # Mensaje final obligatorio
-        st.write("La demanda del capital de trabajo depende de las condiciones operativas, y es importante intentar reducirla. Si el negocio tiene la maquinaria recien invertida, es importante aumentar la tasa de operación de la misma.")
+            # Mensajes adicionales para checkboxes no seleccionados
+            if OP2:
+                st.write("Si clientes habituales pagan a crédito, la demanda del capital de trabajo se aumentará.")
+            if OP4:       
+                st.write("Si no hay proveedores apropiados cerca del negocio, el negocio deberá tener el inventario de las partes. Eso aumentará la demanda del capital de trabajo.")
+                
+            # Mensaje final obligatorio
+            st.write("La demanda del capital de trabajo depende de las condiciones operativas, y es importante intentar reducirla. Si el negocio tiene la maquinaria recién invertida, es importante aumentar la tasa de operación de la misma.")
 
 elif rubro == "Análisis de estados financieros":
     st.title("Análisis de estados financieros")
