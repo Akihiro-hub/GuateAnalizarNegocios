@@ -388,13 +388,13 @@ elif rubro == "Corte y confección":
         
         # Mensajes adicionales para checkboxes no seleccionados
         if not OP1 or not OP2 or not OP3 or not OP4:
-            st.write("Procesos de producción en la industria textil tienden a ser complejos. En muchos casos de la producción de camisas, se cosen separadamente las mangas, el cuello y la parte principal, para luego unirlas. En este sentido, si la capacidad de producción de cada componente es variada, aumentará los productos en proceso. Además, si la máquina de coser se descompone con frecuencia en el proceso de unir las diferentes partes, la producción en total se diseminuirá. Será importante asegurar que dicho proceso no se convierta en un cuello de botella. Una empresa mediana emplea cierto número de empleados, y la división de trabajos entre ellos podrá generar la línea productiva no balanceada, aumentando la demanda del capital de trabajo. Estos puntos tienen que considerarse para mejorar sus ganancias.")
+            st.write("Los procesos productivos de una empresa de corte y confección tienden a ser complejos. En muchos casos de la producción de camisas, se cosen separadamente las mangas, el cuello y la parte principal, para luego unirlas. En este sentido, si la capacidad de producción de cada componente es variada, aumentará los productos en proceso. Además, si la máquina de coser se descompone con frecuencia en el proceso de unir las diferentes partes, la producción en total se diseminuirá. Será importante asegurar que dicho proceso no se convierta en un cuello de botella. Una empresa mediana emplea cierto número de empleados, y la división de trabajos entre ellos podrá generar la línea productiva no balanceada, aumentando la demanda del capital de trabajo. Estos puntos tienen que analizarse bien.")
             st.image("CORTE.jpg", width = 400)
         if not OP5:
-            st.write("La operación de un negocio de corte y confección se basa de las ordenes de los clientes en muchos casos, por ende, el suficiente número de clientes fieles podrá aumentar la eficiencia operativa.")
+            st.write("La operación de muchos negocios de corte y confección se basa de las ordenes de los clientes, por ende, el suficiente número de clientes fieles podrá aumentar la eficiencia operativa.")
         
         # Mensaje final obligatorio
-        st.write("En la mejora de la gestión y la evaluación de necesidades de capital en la industria textil, es importante observar si la empresa tiene o no los clientes estables y el equilibrio de las líneas productivas.")
+        st.write("En la mejora de la gestión y la evaluación de necesidades de capital de una empresa de corte y confeccion, es importante observar si la empresa tiene los clientes estables y el equilibrio de las líneas productivas o no.")
         
 
 elif rubro == "Mercadito(Pulpería)":
