@@ -159,9 +159,9 @@ elif rubro == "Carpintería":
             st.write("El tiempo largo entre la compra de materias primas hasta la entrega de los productos a los clientes, aumentará la demanda del capital de trabajo.")
         
         # Mensaje final obligatorio
-            st.write("Si la empresa se dedica principalmente de la producción para el inventario, más que la producción basada de las oredes de los clientes, la demanda del capital de trabajo se aumentará.")
-            st.write("Muchos talleres de la carpintería suelen tener un espacio limitado, mientras que las materias primas y los productos se deben guardar de manera que no se mojen por la lluvia. Es importante ordenas coas y hacer limipezas todos los días, para guardar bien las materias primas, evitar accidentes laborales, y mantener y mejorar la productividad.")
-            st.image("CAR.jpg", width = 400)
+        st.write("Si la empresa se dedica principalmente de la producción para el inventario, más que la producción basada de las oredes de los clientes, la demanda del capital de trabajo se aumentará.")
+        st.write("Muchos talleres de la carpintería suelen tener un espacio limitado, mientras que las materias primas y los productos se deben guardar de manera que no se mojen por la lluvia. Es importante ordenas coas y hacer limipezas todos los días, para guardar bien las materias primas, evitar accidentes laborales, y mantener y mejorar la productividad.")
+        st.image("CAR.jpg", width = 400)
             
 elif rubro == "Panadería":
     st.title("¿Cómo analizar la operación de Panadería?")
