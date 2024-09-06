@@ -34,7 +34,7 @@ elif rubro == "Capital de trabajo":
     OP3 = st.checkbox("¿El valor de las cuentas por cobrar no es alto, considerando su nivel de ventas?")
     OP3 = st.checkbox("¿El negocio no tiene el inventario sobrante? ¿No tiene saldos de productos que estén fuera de temporada o de moda, que sean difíciles de vender?")
     OP4 = st.checkbox("¿El aumento de la necesidad del capital de trabajo se genera por la ineficiencia operativa, tales como la reducción de la venta, aumento considerable del costos operativos, etc.?")
-    Op5 = st.checkbox("Si la solicitud es para el capital de trabajo eventual, como el fondo para la compra de artículos a revender en la Navidad, ¿el período de amortizaición solicitado es corto?")
+    OP5 = st.checkbox("Si la solicitud es para el capital de trabajo eventual, como el fondo para la compra de artículos a revender en la Navidad, ¿el período de amortizaición solicitado es corto?")
     OP6 = st.checkbox("Si la colicitud es para el capital de trabajo normal, ¿el monto solicitado no supera el monto calculado, mediante la siguiente calculadora?")
 
     st.write("##### :blue[Calculadora del monto total necesario del capital de trabajo normal del negocio]")  
@@ -463,26 +463,26 @@ elif rubro == "Reparación del auto":
         OP3 = st.checkbox("¿El negocio tiene trabajadores con buena capacidad?")
         OP4 = st.checkbox("¿El negocio no tiene inventario sobrante de partes para la reparación?")
     
-        if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):        
-            st.write("## :blue[Sugerencias]")
-            selected_count = sum([OP1, OP2, OP3, OP4])
-            # Mensaje principal basado en la cantidad de selecciones
-            if selected_count == 4:
-                st.write("Probablemente el negocio operaría apropiadamente.")
-                st.balloons()
-            elif selected_count in [2, 3]:
-                st.write("El negocio tendrá que mejorar sus operaciones en ciertos puntos.")
-            else:
-                st.write("El negocio tiene que fortalecerse.")
+    if st.button("Ya la lista de chequeo se ha llenada y vamos a analizar"):        
+        st.write("## :blue[Sugerencias]")
+        selected_count = sum([OP1, OP2, OP3, OP4])
+        # Mensaje principal basado en la cantidad de selecciones
+        if selected_count == 4:
+            st.write("Probablemente el negocio operaría apropiadamente.")
+            st.balloons()
+        elif selected_count in [2, 3]:
+            st.write("El negocio tendrá que mejorar sus operaciones en ciertos puntos.")
+        else:
+            st.write("El negocio tiene que fortalecerse.")
+        
+        # Mensajes adicionales para checkboxes no seleccionados
+        if OP2:
+            st.write("Si clientes habituales pagan a crédito, la demanda del capital de trabajo se aumentará.")
+        if OP4:       
+            st.write("Si no hay proveedores apropiados cerca del negocio, el negocio deberá tener el inventario de las partes. Eso aumentará la demanda del capital de trabajo.")
             
-            # Mensajes adicionales para checkboxes no seleccionados
-            if OP2:
-                st.write("Si clientes habituales pagan a crédito, la demanda del capital de trabajo se aumentará.")
-            if OP4:       
-                st.write("Si no hay proveedores apropiados cerca del negocio, el negocio deberá tener el inventario de las partes. Eso aumentará la demanda del capital de trabajo.")
-                
-            # Mensaje final obligatorio
-            st.write("La demanda del capital de trabajo depende de las condiciones operativas, y es importante intentar reducirla. Si el negocio tiene la maquinaria recién invertida, es importante aumentar la tasa de operación de la misma.")
+        # Mensaje final obligatorio
+        st.write("La demanda del capital de trabajo depende de las condiciones operativas, y es importante intentar reducirla. Si el negocio tiene la maquinaria recién invertida, es importante aumentar la tasa de operación de la misma.")
 
 elif rubro == "Análisis de estados financieros":
     st.title("Análisis de estados financieros")
