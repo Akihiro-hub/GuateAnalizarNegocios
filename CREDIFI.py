@@ -394,7 +394,7 @@ elif rubro == "Corte y confección":
             st.write("La operación de un negocio de corte y confección se basa de las ordenes de los clientes en muchos casos, por ende, el suficiente número de clientes fieles podrá aumentar la eficiencia operativa.")
         
         # Mensaje final obligatorio
-        st.write("En la mejora de la gestión y la evaluación de necesidades de capital en la industria textil, la existencia de clientes estables y el equilibrio de las líneas productivas suelen ser factores importantes.")
+        st.write("En la mejora de la gestión y la evaluación de necesidades de capital en la industria textil, es importante observar si la empresa tiene o no los clientes estables y el equilibrio de las líneas productivas.")
         
 
 elif rubro == "Mercadito(Pulpería)":
