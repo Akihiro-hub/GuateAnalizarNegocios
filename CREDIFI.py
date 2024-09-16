@@ -21,6 +21,7 @@ if rubro == "Seleccione":
         st.write("###### (NOTA: Los detalles de puntos a analizar en cada uno de rubros del negocio como carpintería, panadería, etc. y temas transversales como el analísis de estados financieros se presentarán, dependiendo de su selección en las opciones presentadas a la izquierda.)")
     with col2:
         st.image("Logo.png", width = 280)
+    st.write("Esta aplicación se mantiene durante el período del Proyecto GuateCrece.")
 
 elif rubro == "Capital de trabajo":
     st.write("#### :green[¿Qué tenemos que analizar la solicitud del crédito para el capital de trabajo?]") 
